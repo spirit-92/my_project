@@ -1,0 +1,23 @@
+.header{
+  width: 100%;
+  height: 61px;
+  background-color: #161616;
+  display: flex;
+}
+.circle{
+  display: flex;
+  list-style: none;
+  height: 100%;
+  align-items: center;
+  margin-left: 30px;
+}
+.circle>li{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+
+}
+.circle>li:not(:last-child){
+  margin-right: 5px;
+}
+

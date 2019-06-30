@@ -1,0 +1,75 @@
+<section style="display: flex" class="main">
+<section [ngClass]="{'bgNav': bgNav}"  class="navigation">
+  <div class="logo-nav">
+    <img id="logo" src="{{ logo }}" alt="music">
+  </div>
+  <ul class="navigation-main">
+    <li (click)="getIcon('assets/img/nav-icon/music.svg')" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/">
+      <div class="nav-icon icon_music">
+        <img src="assets/img/nav-icon/music.svg" alt="music">
+      </div>
+      <span>Music</span>
+    </li>
+    <li (click)="getIcon('assets/img/nav-icon/news.svg')" routerLinkActive="active-link" routerLink="/news">
+      <div class="nav-icon icon_news">
+        <img src="assets/img/nav-icon/news.svg" alt="news">
+      </div>
+      <span>News</span>
+      </li>
+    <li (click)="getIcon('assets/img/nav-icon/weather.svg')" routerLinkActive="active-link" routerLink="/weather">
+      <div class="nav-icon icon_weather">
+        <img src="assets/img/nav-icon/weather.svg" alt="weather">
+      </div>
+      <span>Weather</span>
+      </li>
+    <li (click)="getIcon('assets/img/nav-icon/philosphy.svg')" routerLinkActive="active-link" routerLink="/philosophy">
+      <div class="nav-icon icon_philosophy">
+        <img src="assets/img/nav-icon/philosphy.svg" alt="philosphy">
+      </div>
+      <span>Philosophy</span>
+      </li>
+    <li>
+      <div class="nav-icon icon_log_out">
+        <img src="assets/img/nav-icon/log-out-icon.svg" alt="log-out">
+      </div>
+      <span>Log out</span>
+      </li>
+  </ul>
+  <ul class="navigation-favorite">
+    <li>
+      <div class="circle circle__red"></div>
+      <span>Favorites news</span>
+    </li>
+    <li>
+      <div class="circle circle__yellow"></div>
+      <span>My music</span>
+    </li>
+    <li>
+      <div class="circle circle__green"></div>
+      <span>My philosophy</span>
+    </li>
+  </ul>
+  <div class="sociotrack">
+    <button class="btn-sociotrack">
+      <img src="assets/img/nav-icon/sociotrack-logo.svg" alt="sociotrack">
+    </button>
+  </div>
+  <div class="footer-navigation">
+    <ul class="nav-footer">
+      <li>About</li>
+      <li>Terms</li>
+      <li>Privacy</li>
+    </ul>
+    <div class="line-footer"></div>
+    <ul class="nav-footer-help">
+      <li>Help</li>
+      <li>Report</li>
+    </ul>
+  </div>
+</section>
+
+<section class="routes">
+  <router-outlet></router-outlet>
+</section>
+
+</section>
