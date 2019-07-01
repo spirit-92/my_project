@@ -1,4 +1,4 @@
-<div class="bg-news" [ngStyle]="{'background' : 'url(./assets/img/news.jpg)','background-size': 'cover'}"></div>
+<div class="bg-news"  appHeightBg [ngStyle]="{'background' : 'url(./assets/img/news.jpg)','background-size': 'cover'}"></div>
 <div class="navigationNews">
   <form (ngSubmit)="onSubmit()" class="form_News" action="#">
     <mat-form-field class="country_select">
@@ -84,7 +84,9 @@
         </mat-menu>
       </mat-card-content>
       <mat-card-actions class="card-actions">
-      <a href="{{card.url}}" style="margin: 30px 20px; display: inline-block" class="form__search" mat-button color="accent">read more</a>
+        <a class="hrefReadeMore" href="{{card.url}}" >
+          READE MORE
+        </a>
       <button class="btn-addNews__favorite">
         <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="patch1" d="M25.8886 2.01759L18.8094 17.0142L2.97051 19.4268C0.130145 19.8572 -1.00817 23.5157 1.05164 25.6112L12.5107 37.2777L9.80041 53.7581C9.31256 56.737 12.3155 58.9684 14.8307 57.5752L29 49.7937L43.1693 57.5752C45.6845 58.957 48.6874 56.737 48.1996 53.7581L45.4893 37.2777L56.9484 25.6112C59.0082 23.5157 57.8699 19.8572 55.0295 19.4268L39.1906 17.0142L32.1114 2.01759C30.843 -0.655514 27.1679 -0.689494 25.8886 2.01759Z" fill="#323336"/>

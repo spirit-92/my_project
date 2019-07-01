@@ -74,7 +74,6 @@ export class NewsComponent implements OnInit {
       this.postsAll = posts.articles;
       this.posts = posts.articles;
       });
-
   }
   //Запрос на получение новостей по странам и категориям
   onSubmit(){

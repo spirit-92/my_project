@@ -1,6 +1,5 @@
 .bg-news {
   position: absolute;
-  height: 100vh;
   width: 100%;
   left: 0;
   z-index: -99;
@@ -103,7 +102,6 @@
 }
 
 .control-news {
-  margin-left: 27px;
   margin-top: 35px;
   display: flex;
   justify-content: space-evenly;
@@ -212,7 +210,7 @@
   background: transparent;
   border: none;
   margin-right: 60px;
-  margin-bottom: 10px;
+ transform: translateY(-15px);
 }
 
 .btn-addNews__favorite:focus {
@@ -236,4 +234,45 @@
 .card-actions {
   display: flex;
   justify-content: space-between;
+}
+.hrefReadeMore{
+  transition: all.8s;
+  display: inline-table;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  padding: 11px 22px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 18px;
+  color: #ffffff;
+  background: #323336;
+}
+.hrefReadeMore:hover{
+  background: #D7D3D3;
+  color: #1F1F1F;
+}
+/*media queries*/
+@media only screen  and (max-width : 1280px) {
+  .control-news__ul > li:not(:last-child) {
+    margin-bottom: 15px;
+  }
+  .main-card{
+    min-width: 400px;
+    min-height: 350px;
+    max-width: 400px;
+    max-height: 350px;
+  }
+  .img-card{
+    min-height: 240px;
+    max-height: 240px;
+  }
+  .title-card{
+    font-size:  18px ;
+  }
+  .control-news{
+    justify-content: space-around;
+  }
+  .line-news{
+    height: 480px;
+  }
 }
