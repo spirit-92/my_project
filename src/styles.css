@@ -7,7 +7,9 @@
   box-sizing: border-box;
   list-style: none;
 }
-
+body{
+  overflow: hidden;
+}
 
 .circle__red{
   background: #E76847;
@@ -20,4 +22,9 @@
 }
 li:focus{
   outline: none;
+}
+.main-my_project{
+  height: 90vh;
+  overflow-y: auto;
+
 }

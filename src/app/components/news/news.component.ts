@@ -14,6 +14,7 @@ import { Countries } from "../../models/countries";
 export class NewsComponent implements OnInit {
   posts: ArticlesNews[];
   postsAll:ArticlesNews[];
+  placeholder:boolean = false;
   notFound:boolean =false;
   card:ArticlesNews;
   countries:Countries = {
@@ -139,7 +140,11 @@ export class NewsComponent implements OnInit {
   }
   //создаем карточку
   cardCreate(card:ArticlesNews){
-    console.log(card);
+   this.placeholder = true;
     this.card = card
+  }
+  placeholderCard(){
+    this.placeholder=!this.placeholder;
+    this.card= null
   }
 }

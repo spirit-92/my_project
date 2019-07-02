@@ -1,4 +1,6 @@
+<div class="main-my_project">
 <div class="bg-news"   [ngStyle]="{'background' : 'url(./assets/img/news.jpg)','background-size': 'cover'}"></div>
+<div *ngIf="placeholder" (click)="placeholderCard()" class="adaptive-placeholder_card"></div>
 <div class="navigationNews">
   <form (ngSubmit)="onSubmit()" class="form_News" action="#">
     <mat-form-field class="country_select">
@@ -34,7 +36,7 @@
   <div class="control-news">
     <div class="main-news">
       <ul class="control-news__ul">
-        <li style="position: relative" class="control-news__ul-li" *ngFor="let post of posts|mySlice"
+        <li  style="position: relative" class="control-news__ul-li" *ngFor="let post of posts|mySlice"
             (click)="cardCreate(post)">
           <svg class="line_news" width="379" height="52" viewBox="0 0 379 52" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 1H345V51H0V1Z" fill="#323336"/>
@@ -59,8 +61,8 @@
     </div>
     <!--card-->
     <div class="line-news"></div>
-    <div class="main-card">
-    <mat-card *ngIf="card">
+    <div *ngIf="card" class="main-card">
+    <mat-card>
       <img class="img-card" src="{{card.urlToImage}}" alt="{{card.author}}">
       <mat-card-content class="mat-content__card">
       <mat-card-title style="padding: 10px" class="title-card">{{card.title}}</mat-card-title>
@@ -98,5 +100,5 @@
     </div>
   </div>
 </div>
-
+</div>
 
