@@ -22,7 +22,7 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { PhilosophyComponent } from './components/philosophy/philosophy.component';
 import { NewsService } from "./services/news.service";
 import { MySlicePipe } from './pipes/my-slice.pipe';
-import { HeightBgDirective } from './directives/height-bg.directive';
+
 
 
 
@@ -36,7 +36,7 @@ import { HeightBgDirective } from './directives/height-bg.directive';
     WeatherComponent,
     PhilosophyComponent,
     MySlicePipe,
-    HeightBgDirective,
+
 
   ],
   imports: [

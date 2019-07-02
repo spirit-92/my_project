@@ -1,10 +1,10 @@
 .navigation{
-  height: 100vh;
   background: rgba(255, 255, 255, 0.1);
   min-width: 270px;
   max-width: 270px;
   color: white;
   font-family: 'Roboto', sans-serif;
+  padding-bottom: 20px;
 }
 .navigation-main>li{
   transition: .8s;
@@ -114,4 +114,32 @@
 }
 .routes{
   width: 100%;
+}
+/*media queries*/
+@media only screen  and (max-width : 1350px) {
+  .logo-nav>img{
+    min-width: 66px;
+    min-height: 95px;
+    max-height: 95px;
+  }
+  .navigation-main>li{
+    font-size: 14px;
+  }
+  .nav-icon>img{
+    width: 20px;
+    height: 20px;
+  }
+  .navigation-main > li{
+    padding: 10px 0;
+  }
+  .navigation-favorite{
+    font-size: 14px;
+  }
+  .circle{
+    width: 16px;
+    height: 16px;
+  }
+  .footer-navigation{
+    display: none;
+  }
 }
