@@ -4,13 +4,18 @@ import { HttpClient } from "@angular/common/http";
 import { PostNews } from "../models/PostNews";
 import {Observable} from "rxjs/internal/Observable";
 
+
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class NewsService {
  private apiUrlNews = environment.api_url_News;
  private apiKeyNews = environment.api_key_News;
-  constructor(
+
+ constructor(
     private  http: HttpClient
   ) { }
 
@@ -23,4 +28,5 @@ export class NewsService {
   getNewstextQuery(text):Observable<PostNews>{
     return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?q=${text}&apiKey=${this.apiKeyNews}`)
   }
+
 }

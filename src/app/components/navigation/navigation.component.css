@@ -158,7 +158,7 @@
   }
   .navigation-favorite>li{
     display: flex;
-    align-items: end;
+    align-items: flex-end;
   }
   .btn-sociotrack {
     min-width: 92px;

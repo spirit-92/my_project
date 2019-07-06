@@ -1,3 +1,31 @@
 <div class="main-my_project">
 <div class="bg-weather" [ngStyle]="{'background' : 'url(./assets/img/weather.jpg)','background-size': 'cover'}"></div>
+<div class="ul-control">
+<ul class="ul-control-style">
+  <li class="li-title_weather" *ngFor="let list of weatherTitle;let myIndex = index" >
+    <div class="li-title_weather-daysOfWeek">
+      {{list.dt_txt|date:'EEEE'|translateDays}}
+    </div>
+    <div class="li-title_weather-days">
+      {{list.dt_txt|date:'d'}}
+    </div>
+    <div class="li-title_weather-month">
+      {{list.dt_txt|date:'LLLL'|translateMonth}}
+    </div>
+    <div *ngFor="let icon of list.weather"  class="li-title_weather-icon">
+      <img src="https://openweathermap.org/img/wn/{{icon.icon}}@2x.png" alt="">
+    </div>
+    <div class="li-title_weather-temperature">
+      <div class="deg">
+        <p>Мин.</p>
+      <span>{{list.main.temp_min |degreeRounding}}</span>
+      </div>
+      <div class="deg">
+       <p>Макс.</p>
+        <span>{{list.main.temp_max|degreeRounding}}</span>
+      </div>
+    </div>
+  </li>
+</ul>
+</div>
 </div>

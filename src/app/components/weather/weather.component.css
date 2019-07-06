@@ -5,3 +5,78 @@
   left: 0;
   z-index: -99;
 }
+.ul-control{
+  position: relative;
+}
+.li-title_weather{
+  transition: .8s;
+  width: 220px;
+  height: 350px;
+  -webkit-border-top-left-radius: 30px;
+  -webkit-border-top-right-radius: 30px;
+  -moz-border-radius-topleft: 30px;
+  -moz-border-radius-topright: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  background: #323336;
+  display: inline-block;
+}
+.li-title_weather:hover{
+  cursor: pointer;
+  background: #828282;
+}
+.ul-control-style{
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+.ul-control-style>li:not(:last-child){
+  margin-right: 5px;
+}
+.li-title_weather-daysOfWeek{
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  padding: 17px 0;
+  border-bottom: 2px solid #060D14
+}
+.li-title_weather-days{
+  font-family: 'Roboto', sans-serif;
+  font-size: 41px;
+  color: #ffffff;
+  margin-top: 15px;
+  text-align: center;
+}
+.li-title_weather-month{
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 24px;
+  color: #ffffff;
+  margin-top: 15px;
+}
+.li-title_weather-icon{
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+.deg:after{
+  content: '\00B0';
+  width: 6px;
+  height: 6px;
+  color: #ffffff;
+  margin-left: 3px;
+}
+.deg>p{
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.deg>span{
+  font-size: 18px;
+  color: #ffffff;
+}
+.li-title_weather-temperature{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}

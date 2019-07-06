@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { RoutingModule } from "./routing.module";
+import { TranslateDaysPipe } from './pipes/translate-days.pipe';
 //materiel
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +23,9 @@ import { WeatherComponent } from './components/weather/weather.component';
 import { PhilosophyComponent } from './components/philosophy/philosophy.component';
 import { NewsService } from "./services/news.service";
 import { MySlicePipe } from './pipes/my-slice.pipe';
+import { TranslateMonthPipe } from './pipes/translate-month.pipe';
+import { DegreeRoundingPipe } from './pipes/degree-rounding.pipe';
+
 
 
 
@@ -36,6 +40,9 @@ import { MySlicePipe } from './pipes/my-slice.pipe';
     WeatherComponent,
     PhilosophyComponent,
     MySlicePipe,
+    TranslateDaysPipe,
+    TranslateMonthPipe,
+    DegreeRoundingPipe,
 
 
   ],
