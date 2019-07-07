@@ -8,7 +8,9 @@
   list-style: none;
 }
 body{
+  font-family: 'Roboto', sans-serif;
   overflow: hidden;
+  color: #ffffff;
 }
 
 .circle__red{

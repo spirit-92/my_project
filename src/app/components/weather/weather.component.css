@@ -60,23 +60,107 @@
   justify-content: center;
   margin-top: 5px;
 }
-.deg:after{
-  content: '\00B0';
-  width: 6px;
-  height: 6px;
+
+.deg>p:before{
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
   color: #ffffff;
-  margin-left: 3px;
+  margin-left: 10px;
+}
+.deg{
+  display: flex;
 }
 .deg>p{
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  font-size: 30px;
+  color: #ffffff;
 }
 .deg>span{
-  font-size: 18px;
+  font-size: 30px;
   color: #ffffff;
+  display: flex;
 }
 .li-title_weather-temperature{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0 20px;
+  align-items: center;
+}
+.li-title_weather-temperature-svg{
+  width: 40px;
+  height: 40px;
+  fill: white;
+}
+.data-active{
+  text-align: center;
+  color: #ffffff;
+  margin-top: 35px;
+  font-size: 42px;
+}
+.weatherActive{
+  -webkit-border-top-left-radius: 30px;
+  -webkit-border-top-right-radius: 30px;
+  -moz-border-radius-topleft: 30px;
+  -moz-border-radius-topright: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  height: 100%;
+  background: #5064A0;
+}
+.weatherDef{
+  -webkit-border-top-left-radius: 30px;
+  -webkit-border-top-right-radius: 30px;
+  -moz-border-radius-topleft: 30px;
+  -moz-border-radius-topright: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  height: 100%;
+}
+.detailed-weather-ul{
+  display: flex;
+  justify-content: space-around;
+  background: rgba(50, 51, 54, 0.7);
+  margin-top: 40px;
+
+}
+.detailed-weather-ul>li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12.5%;
+
+}
+.detailed-weather_title{
+  border-bottom: 2px solid #161616;
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 30px;
+}
+.detailed-weather-ul>li:nth-child(4){
+  border-right: 3px solid rgba(0, 0, 0, 1);
+}
+.detailed-weather_temperature{
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.detailed-weather_temperature>p:after{
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid #ffffff;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.detailed-weather_pressure,.detailed-weather_humidity,.detailed-weather_wind{
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+  margin-bottom: 20px;
+  align-items: center;
 }

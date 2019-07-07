@@ -25,6 +25,7 @@ import { NewsService } from "./services/news.service";
 import { MySlicePipe } from './pipes/my-slice.pipe';
 import { TranslateMonthPipe } from './pipes/translate-month.pipe';
 import { DegreeRoundingPipe } from './pipes/degree-rounding.pipe';
+import { NumberRoundingPipe } from './pipes/number-rounding.pipe';
 
 
 
@@ -43,6 +44,7 @@ import { DegreeRoundingPipe } from './pipes/degree-rounding.pipe';
     TranslateDaysPipe,
     TranslateMonthPipe,
     DegreeRoundingPipe,
+    NumberRoundingPipe,
 
 
   ],
