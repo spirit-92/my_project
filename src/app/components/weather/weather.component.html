@@ -1,7 +1,7 @@
 <div class="main-my_project">
 <div class="bg-weather" [ngStyle]="{'background' : 'url(./assets/img/weather.jpg)','background-size': 'cover'}"></div>
 <div class="ul-control">
-<ul class="ul-control-style">
+<ul style="transition: 1s" [ngStyle]="{'transform': 'translateX(' + contAdaptTitleCard +'px'+ ')'}" class="ul-control-style">
   <li class="li-title_weather" *ngFor="let list of weatherTitle;let myIndex = index" >
     <div (click)="getWeatherForDay(list,myIndex)" class="li-main-weather"  [className]="myIndex === weatherActiveCard ? 'weatherActive': 'weatherDef'">
     <div class="li-title_weather-daysOfWeek">
@@ -36,14 +36,16 @@
     </div>
   </li>
 </ul>
+    <button *ngIf="visibleButtonLeft" (click)="scrollCard(240)" class="ul_control_btn nav-left" ><</button>
+    <button *ngIf="visibleButtonRight" (click)="scrollCard(-240)" class="ul_control_btn nav-right">></button>
+
 </div>
 
   <h1 class="data-active">
     {{weatherActive|date:'EEEE'|translateDays}} {{weatherActive|date:'d'}} {{weatherActive|date:'LLLL'|translateMonth}}
   </h1>
-
   <div class="detailed-weather">
-    <ul class="detailed-weather-ul">
+  <ul class="detailed-weather-ul">
       <li *ngFor="let weather of weatherForDay">
         <div class="detailed-weather_title">
           <p>{{weather.dt_txt| date:"HH:mm"}}</p>

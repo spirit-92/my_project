@@ -28,5 +28,22 @@ li:focus{
 .main-my_project{
   height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
 
+}
+
+.navigation-favorite{
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  width: 100%;
+  min-height: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 20px;
+  background-color: rgba(255, 255, 255, 0.1);;
+}
+.navigation-favorite>li{
+  display: flex;
+  align-items: flex-end;
 }

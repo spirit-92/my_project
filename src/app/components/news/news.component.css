@@ -258,7 +258,7 @@
 }
 
 /*media queries*/
-@media only screen  and (max-width : 1350px) {
+@media only screen  and (max-width : 1300px) {
   .control-news__ul > li:not(:last-child) {
     margin-bottom: 15px;
   }
@@ -312,7 +312,8 @@
     position: absolute;
     z-index: 99;
     left: 50%;
-    transform: translate(-30%);
+    top: 50%;
+    transform: translate(-50%,-50%);
   }
   .line-news{
     display: none;
@@ -322,9 +323,5 @@
   .navigationNews{
     flex-direction: column;
   }
-  .main-card {
-    -webkit-transform: translate(-30%);
-    transform: translate(-30%,30%);
-    top: 0;
-  }
+
 }

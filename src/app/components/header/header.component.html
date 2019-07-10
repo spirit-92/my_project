@@ -10,4 +10,63 @@
       <div></div>
     </li>
   </ul>
+  <div (click)="adapNav=!adapNav"  class="adapt-nav">
+    <div [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(45deg) translate(5px, 5px)' }" class="adapt-nav-line"></div>
+    <div [ngStyle]="{'display':adapNav === true ? ' none' : ' block' }" class="adapt-nav-line"></div>
+    <div [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(-45deg) translate(5px, -5px)' }" class="adapt-nav-line"></div>
+  </div>
 </header>
+
+
+    <div  (click)="adapNav=!adapNav"  [ngClass]="adapNav?'bg-adapt_nav_open':'bg-adapt_nav_close'"  class="bg-adapt_nav_close"></div>
+
+      <div  [ngClass]="adapNav?'navigation-adapt_open':'navigation-adapt_close'" >
+        <ul class="navigation-main-adapt">
+    <li routerLinkActive="active-link-adapt" [routerLinkActiveOptions]="{exact:true}" routerLink="/">
+      <div class="adapt-icon icon_music-adapt">
+        <img src="assets/img/nav-icon/music.svg" alt="music">
+        <span>Music</span>
+      </div>
+    </li>
+    <li  routerLinkActive="active-link-adapt" routerLink="/news">
+      <div class="adapt-icon icon_news-adapt">
+        <img src="assets/img/nav-icon/news.svg" alt="news">
+        <span>News</span>
+      </div>
+    </li>
+    <li routerLinkActive="active-link-adapt" routerLink="/weather">
+      <div class="adapt-icon icon_weather-adapt">
+        <img src="assets/img/nav-icon/weather.svg" alt="weather">
+        <span>Weather</span>
+      </div>
+    </li>
+    <li routerLinkActive="active-link-adapt" routerLink="/philosophy">
+      <div class="adapt-icon icon_philosophy-adapt">
+        <img src="assets/img/nav-icon/philosphy.svg" alt="philosphy">
+        <span>Philosophy</span>
+      </div>
+    </li>
+    <li>
+      <div class="adapt-icon icon_log_out-adapt">
+        <img src="assets/img/nav-icon/log-out-icon.svg" alt="log-out">
+        <span>Log out</span>
+      </div>
+    </li>
+  </ul>
+        <ul class="navigation-favorite adapt-nav-favorite">
+          <li>
+            <div class="circle-adapt circle__red"></div>
+            <span>Favorites news</span>
+          </li>
+          <li>
+            <div class="circle-adapt circle__yellow"></div>
+            <span>My music</span>
+          </li>
+          <li>
+            <div class="circle-adapt circle__green"></div>
+            <span>My philosophy</span>
+          </li>
+        </ul>
+  </div>
+
+
