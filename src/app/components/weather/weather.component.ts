@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from "../../services/weather.service";
 import { ListWeather } from "../../models/ListWeather";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-weather',
@@ -19,11 +20,13 @@ export class WeatherComponent implements OnInit {
   visibleButtonLeft:boolean=true;
   visibleButtonRight:boolean=true;
   constructor(
+    private spinner: NgxSpinnerService,
     public weather_service: WeatherService,
   ) {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.weather_service.getWeather().subscribe((weather: ListWeather[]) => {
       console.log(weather);
      this.weatherActive =  weather[0].dt_txt;
@@ -35,7 +38,11 @@ export class WeatherComponent implements OnInit {
       });
       this.weatherTitle = weatherTitle;
       this.weatherList =  weather;
-      this.weatherForDay = weather.slice(0,8)
+      this.weatherForDay = weather.slice(0,8);
+      this.spinner.hide();
+    },(err) => {
+      alert(err.error.code);
+      this.spinner.hide();
     });
     if (this.contAdaptTitleCard === 0){
       this.visibleButtonLeft = false
@@ -43,6 +50,7 @@ export class WeatherComponent implements OnInit {
     else if(this.contAdaptTitleCard < 0){
       this.visibleButtonLeft = true
     }
+
   }
 
   getWeatherForDay(day:ListWeather,activeCard:number){

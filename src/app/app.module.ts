@@ -26,6 +26,7 @@ import { MySlicePipe } from './pipes/my-slice.pipe';
 import { TranslateMonthPipe } from './pipes/translate-month.pipe';
 import { DegreeRoundingPipe } from './pipes/degree-rounding.pipe';
 import { NumberRoundingPipe } from './pipes/number-rounding.pipe';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 
@@ -59,7 +60,8 @@ import { NumberRoundingPipe } from './pipes/number-rounding.pipe';
     MatButtonModule,
     MatRadioModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    NgxSpinnerModule
   ],
   providers: [
     NewsService,

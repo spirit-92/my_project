@@ -3,7 +3,7 @@ import { NewsService } from "../../services/news.service";
 import {PostNews} from "../../models/PostNews";
 import {ArticlesNews} from "../../models/ArticlesNews";
 import { Countries } from "../../models/countries";
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-news',
@@ -63,18 +63,26 @@ export class NewsComponent implements OnInit {
   categorySelect:string = 'science';
   count:any[];
   constructor(
+    private spinner: NgxSpinnerService,
     public news_service: NewsService
   ) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.news_service.getNews().subscribe((posts:PostNews) =>{
+
       //создаем точки для пагинации
       this.count = new Array(Math.ceil(posts.articles.length/7));
       // обрезаем текст
       posts = this.textClipping(posts);
       this.postsAll = posts.articles;
       this.posts = posts.articles;
-      });
+      this.spinner.hide();
+      },(err) => {
+      alert(err.error.code);
+      this.spinner.hide();
+    });
+
   }
   //Запрос на получение новостей по странам и категориям
   onSubmit(){
