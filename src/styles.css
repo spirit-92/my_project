@@ -26,7 +26,7 @@ li:focus{
   outline: none;
 }
 .main-my_project{
-  height: 90vh;
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -66,4 +66,48 @@ li:focus{
 }
 .text-aboutProject>h1{
   margin-bottom: 20px;
+}
+img{
+  max-width: 100%;
+  height: auto;
+}
+mat-expansion-panel{
+  background: #ffffff !important;
+  color: rgba(0,0,0,.7) !important;
+}
+.mat-expansion-indicator:after {
+  color: rgba(0,0,0,.7) !important;
+}
+
+.ngx-advanced-audio-player {
+  background: #ffffff !important;
+  color: rgba(0,0,0,.7) !important;
+}
+/*.mat-table{*/
+  /*background: #ffffff !important;*/
+/*}*/
+
+.mat-header-cell{
+  background: #ffffff !important;
+  color: rgba(0,0,0,.7) !important;
+  border-bottom-color: rgba(0,0,0,.7);
+}
+.mat-cell{
+  background: #ffffff !important;
+  color: rgba(0,0,0,.7) !important;
+  border-bottom-color: rgba(0,0,0,.7);
+}
+td.mat-cell{
+  border-bottom: 2px solid black;
+}
+
+.mat-header-row>th{
+  border-bottom-color: rgba(0,0,0,.7);
+}
+.mat-paginator-container{
+  background: rgb(76, 76, 76) !important
+
+}
+.ng-star-inserted>.p-1{
+  background: rgb(76, 76, 76) !important;
 }

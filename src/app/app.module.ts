@@ -27,10 +27,8 @@ import { TranslateMonthPipe } from './pipes/translate-month.pipe';
 import { DegreeRoundingPipe } from './pipes/degree-rounding.pipe';
 import { NumberRoundingPipe } from './pipes/number-rounding.pipe';
 import { NgxSpinnerModule } from "ngx-spinner";
-
-
-
-
+import { NgxAudioPlayerModule } from "ngx-audio-player";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -61,7 +59,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatRadioModule,
     MatCardModule,
     MatMenuModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxAudioPlayerModule,
+    FontAwesomeModule
   ],
   providers: [
     NewsService,

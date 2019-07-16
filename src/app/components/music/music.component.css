@@ -1,3 +1,4 @@
+
 .bg-music{
   position: absolute;
   height: 100vh;
@@ -5,3 +6,17 @@
   left: 0;
   z-index: -99;
 }
+.audio{
+  background: #ffffff;
+  border-radius: 80px 80px 0 0;
+  -moz-border-radius: 80px 80px 0 0;
+  -webkit-border-radius: 80px 80px 0 0;
+  border: 0 solid #000000;
+}
+.pos-music{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
