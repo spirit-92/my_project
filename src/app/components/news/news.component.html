@@ -36,8 +36,8 @@
   <div class="control-news">
     <div class="main-news">
       <ul class="control-news__ul">
-        <li  style="position: relative" class="control-news__ul-li" *ngFor="let post of posts|mySlice"
-            (click)="cardCreate(post)">
+        <li  style="position: relative" class="control-news__ul-li " *ngFor="let post of posts|mySlice;let myIndex = index"
+            (click)="cardCreate(post,myIndex)" [className]="lineActive === myIndex ? 'control-news__ul-li line_news-active': 'control-news__ul-li'" >
           <svg class="line_news" width="379" height="52" viewBox="0 0 379 52" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 1H345V51H0V1Z" fill="#323336"/>
             <path d="M377 26L347 51.1147V0.885263L377 26Z" fill="#323336"/>

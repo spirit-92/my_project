@@ -16,6 +16,7 @@ export class NewsComponent implements OnInit {
   postsAll:ArticlesNews[];
   placeholder:boolean = false;
   notFound:boolean =false;
+  lineActive:number;
   card:ArticlesNews;
   countries:Countries = {
     countryArr:[
@@ -129,6 +130,7 @@ export class NewsComponent implements OnInit {
   }
   // пагинция постов
   toggleNews(count){
+    this.lineActive = -1;
     this.countActiveDots = count;
     const sliceArr = this.postsAll.filter(function(item,index) {
       if (count*7<=index) {
@@ -147,8 +149,9 @@ export class NewsComponent implements OnInit {
     return posts
   }
   //создаем карточку
-  cardCreate(card:ArticlesNews){
-   this.placeholder = true;
+  cardCreate(card:ArticlesNews,lineActive:number){
+    this.lineActive = lineActive;
+    this.placeholder = true;
     this.card = card
   }
   placeholderCard(){

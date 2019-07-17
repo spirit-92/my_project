@@ -94,6 +94,10 @@
   fill: rgba(130, 130, 130, 1);
 }
 
+.line_news-active>.line_news > path{
+  fill: rgba(130, 130, 130, 1);
+}
+
 .control-news__ul {
   display: flex;
   flex-direction: column;
