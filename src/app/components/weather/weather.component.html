@@ -1,6 +1,7 @@
 <div class="main-my_project">
 <div class="bg-weather" [ngStyle]="{'background' : 'url(./assets/img/weather.jpg)','background-size': 'cover'}"></div>
-<div class="ul-control">
+  <div style="position: relative">
+<div class="ul-control" style="overflow-x: auto">
 <ul style="transition: 1s" [ngStyle]="{'transform': 'translateX(' + contAdaptTitleCard +'px'+ ')'}" class="ul-control-style">
   <li class="li-title_weather" *ngFor="let list of weatherTitle;let myIndex = index" >
     <div (click)="getWeatherForDay(list,myIndex)" class="li-main-weather"  [className]="myIndex === weatherActiveCard ? 'weatherActive': 'weatherDef'">
@@ -36,11 +37,12 @@
     </div>
   </li>
 </ul>
+</div>
+  <div style="position: absolute; width: 100%;top: 50%;transform: translateY(-50%)">
     <button *ngIf="visibleButtonLeft" (click)="scrollCard(240)" class="ul_control_btn nav-left" ><</button>
     <button *ngIf="visibleButtonRight" (click)="scrollCard(-240)" class="ul_control_btn nav-right">></button>
-
-</div>
-
+  </div>
+  </div>
   <h1 class="data-active">
     {{weatherActive|date:'EEEE'|translateDays}} {{weatherActive|date:'d'}} {{weatherActive|date:'LLLL'|translateMonth}}
   </h1>
