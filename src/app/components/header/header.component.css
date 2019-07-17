@@ -87,6 +87,9 @@
   display: flex;
   transform: translateX(75px);
 }
+.navigation-main-adapt>li{
+  cursor: pointer;
+}
 .adapt-icon{
   display: flex;
   align-items: center;

@@ -22,31 +22,31 @@
 
       <div  [ngClass]="adapNav?'navigation-adapt_open':'navigation-adapt_close'" >
         <ul class="navigation-main-adapt">
-    <li routerLinkActive="active-link-adapt" [routerLinkActiveOptions]="{exact:true}" routerLink="/">
+    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" [routerLinkActiveOptions]="{exact:true}" routerLink="/">
       <div class="adapt-icon icon_music-adapt">
         <img src="assets/img/nav-icon/music.svg" alt="music">
         <span>Music</span>
       </div>
     </li>
-    <li  routerLinkActive="active-link-adapt" routerLink="/news">
+    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" routerLink="/news">
       <div class="adapt-icon icon_news-adapt">
         <img src="assets/img/nav-icon/news.svg" alt="news">
         <span>News</span>
       </div>
     </li>
-    <li routerLinkActive="active-link-adapt" routerLink="/weather">
+    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" routerLink="/weather">
       <div class="adapt-icon icon_weather-adapt">
         <img src="assets/img/nav-icon/weather.svg" alt="weather">
         <span>Weather</span>
       </div>
     </li>
-    <li routerLinkActive="active-link-adapt" routerLink="/philosophy">
+    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" routerLink="/philosophy">
       <div class="adapt-icon icon_philosophy-adapt">
         <img src="assets/img/nav-icon/philosphy.svg" alt="philosphy">
         <span>Philosophy</span>
       </div>
     </li>
-    <li>
+    <li (click)="adapNav=!adapNav">
       <div class="adapt-icon icon_log_out-adapt">
         <img src="assets/img/nav-icon/log-out-icon.svg" alt="log-out">
         <span>Log out</span>
