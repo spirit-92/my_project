@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef,AfterViewInit} from '@angular/core';
 import { Track } from 'ngx-audio-player';
 
 @Component({
@@ -7,11 +7,13 @@ import { Track } from 'ngx-audio-player';
   styleUrls: ['./music.component.css']
 })
 
-export class MusicComponent implements OnInit {
+export class MusicComponent implements OnInit,AfterViewInit {
+@ViewChild('searchMusic',{static:false}) searchMusic:ElementRef;
   msaapDisplayTitle = true;
   msaapDisplayPlayList = true;
   msaapPageSizeOptions = [5,10,15];
   msaapDisplayVolumeControls = true;
+  titleSearch:string ='';
   // Material Style Advance Audio Player Playlist
 
   msaapPlaylist: Track[] = [
@@ -116,11 +118,11 @@ export class MusicComponent implements OnInit {
       link: 'assets/music/Би 2 - Легион.mp3'
     },
   ];
+  constructor() {}
+  ngOnInit() {}
+  ngAfterViewInit(){}
 
-
-  constructor() { }
-
-  ngOnInit() {
+  onfocus(){
+    this.searchMusic.nativeElement.placeholder=''
   }
-
 }

@@ -4,11 +4,10 @@
 
   <div style="max-width: 800px" class="audio">
     <img src="./assets/music/Music-bg.png" alt="">
-  <mat-advanced-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle"
+    <input (focus)="onfocus()" #searchMusic [(ngModel)]="titleSearch" title="searchMusic" class="searchMusic" type="text" placeholder="Search music">
+  <mat-advanced-audio-player [playlist]="msaapPlaylist |searchMusic:titleSearch" [displayTitle]="msaapDisplayTitle"
                              [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
                              [expanded]="true" [displayVolumeControls]="true">
-
   </mat-advanced-audio-player>
   </div>
-
 </div>

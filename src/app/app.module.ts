@@ -29,6 +29,7 @@ import { NumberRoundingPipe } from './pipes/number-rounding.pipe';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAudioPlayerModule } from "ngx-audio-player";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { SearchMusicPipe } from './pipes/search-music.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     TranslateMonthPipe,
     DegreeRoundingPipe,
     NumberRoundingPipe,
+    SearchMusicPipe,
 
 
   ],
