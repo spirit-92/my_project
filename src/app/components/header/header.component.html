@@ -10,19 +10,25 @@
       <div></div>
     </li>
   </ul>
-  <div (click)="adapNav=!adapNav"  class="adapt-nav">
-    <div [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(45deg) translate(5px, 5px)' }" class="adapt-nav-line"></div>
+  <div (click)="adapNav=!adapNav" class="adapt-nav">
+    <div
+      [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(45deg) translate(5px, 5px)' }"
+      class="adapt-nav-line"></div>
     <div [ngStyle]="{'display':adapNav === true ? ' none' : ' block' }" class="adapt-nav-line"></div>
-    <div [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(-45deg) translate(5px, -5px)' }" class="adapt-nav-line"></div>
+    <div
+      [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(-45deg) translate(5px, -5px)' }"
+      class="adapt-nav-line"></div>
   </div>
 </header>
 
 
-    <div  (click)="adapNav=!adapNav"  [ngClass]="adapNav?'bg-adapt_nav_open':'bg-adapt_nav_close'"  class="bg-adapt_nav_close"></div>
+<div (click)="adapNav=!adapNav" [ngClass]="adapNav?'bg-adapt_nav_open':'bg-adapt_nav_close'"
+     class="bg-adapt_nav_close"></div>
 
-      <div  [ngClass]="adapNav?'navigation-adapt_open':'navigation-adapt_close'" >
-        <ul class="navigation-main-adapt">
-    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" [routerLinkActiveOptions]="{exact:true}" routerLink="/">
+<div [ngClass]="adapNav?'navigation-adapt_open':'navigation-adapt_close'">
+  <ul class="navigation-main-adapt">
+    <li (click)="adapNav=!adapNav" routerLinkActive="active-link-adapt" [routerLinkActiveOptions]="{exact:true}"
+        routerLink="/">
       <div class="adapt-icon icon_music-adapt">
         <img src="assets/img/nav-icon/music.svg" alt="music">
         <span>Music</span>
@@ -53,20 +59,20 @@
       </div>
     </li>
   </ul>
-        <ul class="navigation-favorite adapt-nav-favorite">
-          <li>
-            <div class="circle-adapt circle__red"></div>
-            <span>Favorites news</span>
-          </li>
-          <li>
-            <div class="circle-adapt circle__yellow"></div>
-            <span>My music</span>
-          </li>
-          <li>
-            <div class="circle-adapt circle__green"></div>
-            <span>My philosophy</span>
-          </li>
-        </ul>
-  </div>
+  <ul class="navigation-favorite adapt-nav-favorite">
+    <li>
+      <div class="circle-adapt circle__red"></div>
+      <span>Favorites news</span>
+    </li>
+    <li>
+      <div class="circle-adapt circle__yellow"></div>
+      <span>My music</span>
+    </li>
+    <li>
+      <div class="circle-adapt circle__green"></div>
+      <span>My philosophy</span>
+    </li>
+  </ul>
+</div>
 
 
