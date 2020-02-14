@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { PostNews } from "../models/PostNews";
-import {Observable} from "rxjs/internal/Observable";
-
-
+import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {PostNews} from '../models/PostNews';
+import {Observable} from 'rxjs/internal/Observable';
 
 
 @Injectable({
@@ -12,21 +10,24 @@ import {Observable} from "rxjs/internal/Observable";
 })
 
 export class NewsService {
- private apiUrlNews = environment.api_url_News;
- private apiKeyNews = environment.api_key_News;
+  private apiUrlNews = environment.api_url_News;
+  private apiKeyNews = environment.api_key_News;
 
- constructor(
+  constructor(
     private  http: HttpClient
-  ) { }
+  ) {
+  }
 
-  getNews():Observable<PostNews> {
-    return this.http.get<PostNews>(`${this.apiUrlNews}${this.apiKeyNews}`)
+  getNews(): Observable<PostNews> {
+    return this.http.get<PostNews>(`${this.apiUrlNews}${this.apiKeyNews}`);
   }
-  getNewsCountryCategory(country,category):Observable<PostNews>{
-    return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.apiKeyNews}`)
+
+  getNewsCountryCategory(country, category): Observable<PostNews> {
+    return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.apiKeyNews}`);
   }
-  getNewstextQuery(text):Observable<PostNews>{
-    return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?q=${text}&apiKey=${this.apiKeyNews}`)
+
+  getNewstextQuery(text): Observable<PostNews> {
+    return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?q=${text}&apiKey=${this.apiKeyNews}`);
   }
 
 }
