@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RoutingModule } from "./routing.module";
 import { TranslateDaysPipe } from './pipes/translate-days.pipe';
 //materiel
@@ -21,6 +21,7 @@ import { MusicComponent } from './components/music/music.component';
 import { NewsComponent } from './components/news/news.component';
 import { WeatherComponent } from './components/weather/weather.component';
 import { PhilosophyComponent } from './components/philosophy/philosophy.component';
+import  { RegistrationComponent } from './components/registration/registration.component';
 import { NewsService } from "./services/news.service";
 import { MySlicePipe } from './pipes/my-slice.pipe';
 import { TranslateMonthPipe } from './pipes/translate-month.pipe';
@@ -46,7 +47,7 @@ import { SearchMusicPipe } from './pipes/search-music.pipe';
     DegreeRoundingPipe,
     NumberRoundingPipe,
     SearchMusicPipe,
-
+    RegistrationComponent
 
   ],
   imports: [
@@ -63,7 +64,8 @@ import { SearchMusicPipe } from './pipes/search-music.pipe';
     MatMenuModule,
     NgxSpinnerModule,
     NgxAudioPlayerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [
     NewsService,

@@ -1,0 +1,48 @@
+<div  class="main-my_project">
+  <div  class="bg-register" [ngStyle]="{'background' : 'url(./assets/img/register-bg.jpg)14% 0','background-size': 'cover'}"></div>
+  <div class="container-form">
+    <form (ngSubmit)="onSubmit()" class="example-form form-register">
+      <h1 class="mat-h1 registration-h1">Registration</h1>
+    <mat-form-field class="example-full-width register-input">
+      <mat-label>Email</mat-label>
+      <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+             placeholder="Ex. pat@example.com">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width register-input">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="textFormControl" [errorStateMatcher]="matcher"
+             placeholder="name">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="textFormControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="textFormControl.hasError('maxlength')">
+        Name is <strong>max 8 letters</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width register-input">
+      <mat-label>Password</mat-label>
+      <input (focusout)="password()" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+             placeholder="password">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+        Password is <strong>min 6 letters</strong>
+      </mat-error>
+    </mat-form-field>
+      <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">register
+      </button>
+  </form>
+  </div>
+</div>

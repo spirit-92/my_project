@@ -50,7 +50,7 @@ export class NewsComponent implements OnInit {
       },
       {
         country: 'Italy',
-        code:'it'
+        code: 'it'
       },
       {
         country: 'China',

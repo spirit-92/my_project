@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef,AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef,AfterViewInit} from '@angular/core';
 import { Track } from 'ngx-audio-player';
 
 @Component({
