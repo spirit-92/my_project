@@ -97,7 +97,7 @@ export class NewsComponent implements OnInit {
         //создаем точки для пагинации
         this.count = new Array(Math.ceil(posts.articles.length/7));
         // обрезаем текст
-        console.log(posts);
+
         posts = this.textClipping(posts);
         this.postsAll = posts.articles;
         this.posts = posts.articles;

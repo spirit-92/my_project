@@ -5,13 +5,14 @@ import {NewsComponent} from './components/news/news.component';
 import {WeatherComponent} from './components/weather/weather.component';
 import {PhilosophyComponent} from './components/philosophy/philosophy.component';
 import {RegistrationComponent} from './components/registration/registration.component';
+import {AuthGuard} from './auth.guard';
 
 
 const routes: Routes = [
-  {path: '', component: MusicComponent},
-  {path: 'news', component: NewsComponent},
-  {path: 'weather', component: WeatherComponent},
-  {path: 'philosophy', component: PhilosophyComponent},
+  {path: '', component: MusicComponent,canActivate:[AuthGuard]},
+  {path: 'news', component: NewsComponent,canActivate:[AuthGuard]},
+  {path: 'weather', component: WeatherComponent,canActivate:[AuthGuard]},
+  {path: 'philosophy', component: PhilosophyComponent,canActivate:[AuthGuard]},
   {path: 'registration', component: RegistrationComponent},
 ];
 

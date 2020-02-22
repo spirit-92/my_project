@@ -22,6 +22,7 @@ export class NewsService {
     return this.http.get<PostNews>(`${this.apiUrlNews}${this.apiKeyNews}`);
   }
 
+
   getNewsCountryCategory(country, category): Observable<PostNews> {
     return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.apiKeyNews}`);
   }

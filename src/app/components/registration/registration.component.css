@@ -50,3 +50,17 @@
 .register-input{
   margin-bottom: 30px;
 }
+.error_api_email{
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+.error_api_email::placeholder{
+  color: #f44336;
+}
+.error_api_email{
+  color: #f44336;
+}
+.error_api_password{
+  margin-top: -15px;
+
+}
