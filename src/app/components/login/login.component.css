@@ -1,0 +1,66 @@
+.bg-register {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: -99;
+  height: 100vh;
+  min-height: 800px;
+}
+.container-form{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-register{
+  display: flex;
+  flex-direction: column;
+}
+.registration-h1{
+  font-size: 75px;
+  letter-spacing: 1.3px;
+  margin-bottom: 40px;
+}
+.form__register {
+  font-size: 20px;
+  transition: .8s;
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  text-transform: uppercase;
+  background-color: rgba(50, 51, 54, 1);
+  border: none;
+  color: rgba(255, 254, 254, 1);
+  min-width: 81px;
+  min-height: 50px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 5px 8px -1px rgba(0, 0, 0, 0.43);
+  box-shadow: 0 5px 8px -1px rgba(0, 0, 0, 0.43);
+}
+
+.form__register:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: #161616;
+}
+
+.form__register:focus {
+  outline: none;
+}
+.register-input{
+  margin-bottom: 30px;
+}
+.error_api_email{
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+.error_api_email::placeholder{
+  color: #f44336;
+}
+.error_api_email{
+  color: #f44336;
+}
+.error_api_password{
+  margin-top: -15px;
+
+}

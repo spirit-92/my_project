@@ -6,6 +6,7 @@ import {WeatherComponent} from './components/weather/weather.component';
 import {PhilosophyComponent} from './components/philosophy/philosophy.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {AuthGuard} from './auth.guard';
+import {LoginComponent} from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'weather', component: WeatherComponent,canActivate:[AuthGuard]},
   {path: 'philosophy', component: PhilosophyComponent,canActivate:[AuthGuard]},
   {path: 'registration', component: RegistrationComponent},
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({

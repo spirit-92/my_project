@@ -5,6 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RoutingModule } from "./routing.module";
 import { TranslateDaysPipe } from './pipes/translate-days.pipe';
+
 //materiel
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +32,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxAudioPlayerModule } from "ngx-audio-player";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SearchMusicPipe } from './pipes/search-music.pipe';
-
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { SearchMusicPipe } from './pipes/search-music.pipe';
     DegreeRoundingPipe,
     NumberRoundingPipe,
     SearchMusicPipe,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
 
   ],
   imports: [
