@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { NewsService } from "../../services/news.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,7 +30,9 @@ export class RegistrationComponent implements OnInit {
   ]);
   matcher = new MyErrorStateMatcher();
 
-  constructor() {
+  constructor(
+    public news_service: NewsService
+  ) {
   }
 
   ngOnInit() {
@@ -38,6 +41,9 @@ export class RegistrationComponent implements OnInit {
   password(){
     if (this.passwordFormControl.status === 'VALID'){
       // console.log(this.passwordFormControl.value)
+      this.news_service.getMyapi().subscribe(res => {
+        console.log(res);
+      });
     }
   }
   onSubmit(){

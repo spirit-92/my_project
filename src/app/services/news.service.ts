@@ -29,5 +29,7 @@ export class NewsService {
   getNewstextQuery(text): Observable<PostNews> {
     return this.http.get<PostNews>(`https://newsapi.org/v2/top-headlines?q=${text}&apiKey=${this.apiKeyNews}`);
   }
-
+  getMyapi(): Observable<any> {
+    return this.http.get<any>(`http://12c4e3ce.ngrok.io/user`);
+  }
 }
