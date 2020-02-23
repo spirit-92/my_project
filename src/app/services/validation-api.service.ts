@@ -10,17 +10,17 @@ export class ValidationApiService {
     private  http: HttpClient
   ) { }
   validatePassword(password:string): Observable<any> {
-    return this.http.get<any>(`http://localhost:1111/user?password=${password}`);
+    return this.http.get<any>(`http://dc78fb6b.ngrok.io?password=${password}`);
   }
 
   validateEmail(email:string): Observable<any> {
-    return this.http.get<any>(`http://localhost:1111/user?email=${email}`);
+    return this.http.get<any>(`http://dc78fb6b.ngrok.io?email=${email}`);
   }
   validateName(name:string): Observable<any> {
-    return this.http.get<any>(`http://localhost:1111/user?name=${name}`);
+    return this.http.get<any>(`http://dc78fb6b.ngrok.io?name=${name}`);
   }
   saveUser(name:string,password:string,email:string): Observable<any> {
-    return this.http.post<any>(`http://localhost:1111/registration`,{
+    return this.http.post<any>(`http://dc78fb6b.ngrok.io/registration`,{
       "name":name,
       "password":password,
       "email": email
