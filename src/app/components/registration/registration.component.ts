@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -21,7 +21,11 @@ export class RegistrationComponent implements OnInit {
 
   public errorEmail = [];
   public errorPassword = [];
-  public  errorName = [];
+  public errorName = [];
+  public errorImg = [];
+  public hide = true;
+  selectedFile: File = null;
+
   //Validation
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -35,6 +39,9 @@ export class RegistrationComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
+  fileFormControl = new FormControl('', [
+    Validators.required,
+  ]);
   matcher = new MyErrorStateMatcher();
 
   constructor(
@@ -45,19 +52,21 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('token')) {
+      this.route.navigate(['./']);
+    }
   }
 
   password() {
-    this.errorPassword= [];
+    this.errorPassword = [];
     if (this.passwordFormControl.status === 'VALID') {
       this.validPass.validatePassword(this.passwordFormControl.value).subscribe(res => {
-        },error => {
+      }, error => {
         if (error.status === 400) {
           error.error.errors.password.forEach(error => {
             this.errorPassword.push(error);
             // @ts-ignore
-            this.passwordFormControl.status = "INVALID"
+            this.passwordFormControl.status = 'INVALID';
           });
         }
       });
@@ -73,37 +82,47 @@ export class RegistrationComponent implements OnInit {
           error.error.errors.email.forEach(error => {
             this.errorEmail.push(error);
             // @ts-ignore
-            this.emailFormControl.status = "INVALID"
+            this.emailFormControl.status = 'INVALID';
           });
         }
       });
     }
   }
-  name(){
-    this.errorName= [];
+
+  name() {
+    this.errorName = [];
 
     if (this.textFormControl.status === 'VALID') {
       this.validPass.validateName(this.textFormControl.value).subscribe(res => {
-      },error => {
+      }, error => {
         if (error.status === 400) {
           error.error.errors.name.forEach(error => {
             this.errorName.push(error);
             // @ts-ignore
-            this.textFormControl.status = "INVALID"
+            this.textFormControl.status = 'INVALID';
           });
         }
       });
     }
-
   }
+
+  onFileSelected(event) {
+    this.selectedFile = <File> event.target.files[0];
+  }
+
   onSubmit() {
-    if (this.emailFormControl.status==='VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID'){
-      this.validPass.saveUser(this.textFormControl.value,this.passwordFormControl.value,this.emailFormControl.value).subscribe(res =>{
-        localStorage.setItem('token',res.token);
-        this.route.navigate(['./'])
-      },error => {
-        console.log(error)
-      })
+    this.errorImg= [];
+    const fb = new FormData;
+    fb.append('image', this.selectedFile);
+    if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID') {
+      this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value,fb).subscribe(res => {
+        localStorage.setItem('token', res.token);
+        this.route.navigate(['./']);
+      }, error => {
+        error.error.errors.image.forEach(error => {
+          this.errorImg.push(error);
+        })
+      });
     }
 
   }

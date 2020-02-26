@@ -28,7 +28,7 @@
 
       <mat-form-field class="example-full-width register-input">
         <mat-label>Password</mat-label>
-        <input (focusout)="password()" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+        <input type="password"  (focusout)="password()" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
                placeholder="password">
         <mat-hint>Errors appear instantly!</mat-hint>
         <mat-error *ngIf="passwordFormControl.hasError('required')">
@@ -44,6 +44,8 @@
         </strong>
       </mat-error>
       <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">Login
+      </button>
+      <button routerLink="/registration" style="margin-top: 40px" class="form-control form__register" mat-button color="accent">Registration
       </button>
     </form>
   </div>

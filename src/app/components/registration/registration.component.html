@@ -39,21 +39,31 @@
         </strong>
       </mat-error>
 
-    <mat-form-field class="example-full-width register-input">
-      <mat-label>Password</mat-label>
-      <input (focusout)="password()" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-             placeholder="password">
-      <mat-hint>Errors appear instantly!</mat-hint>
-      <mat-error *ngIf="passwordFormControl.hasError('required')">
-        Password is <strong>required</strong>
-      </mat-error>
-      <mat-error *ngIf="passwordFormControl.hasError('minlength')">
-        Password is <strong>min 6 letters</strong>
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field class="example-full-width register-input">
+        <mat-label>Password</mat-label>
+        <input (focusout)="password()"  matInput [type]="hide ? 'password' : 'text'"  [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+               placeholder="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+          Password is <strong>min 6 letters</strong>
+        </mat-error>
+      </mat-form-field>
       <mat-error class="error_api_password" *ngIf="errorPassword.length">
         <strong *ngFor="let error of errorPassword">
           {{error}}
+        </strong>
+      </mat-error>
+
+      <input type="file" (change)="onFileSelected($event)">
+      <mat-error style="margin-top: 10px;" *ngIf="errorImg.length">
+        <strong *ngFor="let error of errorImg">
+          <p>{{error}}</p>
         </strong>
       </mat-error>
       <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">register
@@ -63,3 +73,4 @@
   </form>
   </div>
 </div>
+

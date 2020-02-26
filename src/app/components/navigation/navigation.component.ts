@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -11,7 +11,8 @@ export class NavigationComponent implements OnInit {
   bgNav: boolean;
 
   constructor(
-    private location: Location
+    private location: Location,
+    public route: Router
   ) {}
 
   ngOnInit() {
@@ -38,6 +39,10 @@ export class NavigationComponent implements OnInit {
   getIcon(icon) {
     this.logo = icon;
     icon === 'assets/img/nav-icon/philosphy.svg' ? this.bgNav = true : this.bgNav = false;
+  }
+  LogOut(){
+    localStorage.removeItem('token');
+    this.route.navigate(['./registration'])
   }
 }
 

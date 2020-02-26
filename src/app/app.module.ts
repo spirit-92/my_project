@@ -33,6 +33,7 @@ import { NgxAudioPlayerModule } from "ngx-audio-player";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SearchMusicPipe } from './pipes/search-music.pipe';
 import { LoginComponent } from './components/login/login.component';
+import {MatIconModule} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,23 +53,24 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent
 
   ],
-  imports: [
-    BrowserModule,
-    RoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatRadioModule,
-    MatCardModule,
-    MatMenuModule,
-    NgxSpinnerModule,
-    NgxAudioPlayerModule,
-    FontAwesomeModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        RoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatButtonModule,
+        MatRadioModule,
+        MatCardModule,
+        MatMenuModule,
+        NgxSpinnerModule,
+        NgxAudioPlayerModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        MatIconModule
+    ],
   providers: [
     NewsService,
 

@@ -40,7 +40,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if (localStorage.getItem('token')){
+      this.route.navigate(['./'])
+    }
   }
 
   password() {
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
   email() {
     this.errorEmail = [];
     if (this.emailFormControl.status === 'VALID') {
-      this.validPass.validateEmail(this.emailFormControl.value).subscribe(res => {
+      this.validPass.getUserValid(this.emailFormControl.value).subscribe(res => {
       }, error => {
         if (error.status === 400) {
           error.error.errors.email.forEach(error => {
@@ -77,11 +79,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID') {
-      this.validPass.login(this.passwordFormControl.value, this.emailFormControl.value).subscribe(res => {
+      this.validPass.authorise(this.passwordFormControl.value, this.emailFormControl.value).subscribe(res => {
         localStorage.setItem('token', res.token);
         this.route.navigate(['./']);
       }, error => {
         console.log(error);
+        this.errorPassword.push(error.error.body);
       });
     }
 
