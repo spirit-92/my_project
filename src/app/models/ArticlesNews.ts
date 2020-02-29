@@ -11,3 +11,4 @@ export interface ArticlesNews {
   url: string,
   urlToImage: string
 }
+

@@ -13,20 +13,26 @@ export class HeaderComponent implements OnInit {
   adapNav: boolean = false;
   user: UserModel;
   local = environment.api_url_my + '/storage/';
+  userToken: string;
 
   constructor(
     public http: ValidationApiService,
   ) {
   }
 
-  ngOnInit() {
-    let token = localStorage.getItem('token');
-    this.http.getUser(token).subscribe((user: UserModel) => {
-      this.user = user;
-      console.log(this.local+this.user.user.avatar)
-      }, error => {
-      console.log(error);
+  ngOnInit(): void {
+    this.http.userEvent.subscribe((res: string) => {
+      this.userToken = res;
+      if (this.userToken||localStorage.getItem('token')) {
+        this.userToken = localStorage.getItem('token');
+        this.http.getUser(this.userToken).subscribe((user: UserModel) => {
+          this.user = user;
+        }, error => {
+          console.log(error);
+        });
+      }
     });
+
 
   }
 
