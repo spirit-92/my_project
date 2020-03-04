@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     let token = localStorage.getItem('token');
     this.http.getUser(token).subscribe((user: UserModel) => {
       this.user = user;
-      console.log(this.local+this.user.user.avatar)
+      console.log(this.local+this.user.user.avatar);
       }, error => {
       console.log(error);
     });
