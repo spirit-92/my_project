@@ -111,17 +111,18 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.errorImg= [];
+    this.errorImg = [];
     const fb = new FormData;
     fb.append('image', this.selectedFile);
     if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID') {
-      this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value,fb).subscribe(res => {
+      this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value, fb).subscribe(res => {
         localStorage.setItem('token', res.token);
+        this.validPass.emitUserEvent(res.token);
         this.route.navigate(['./']);
       }, error => {
         error.error.errors.image.forEach(error => {
           this.errorImg.push(error);
-        })
+        });
       });
     }
 

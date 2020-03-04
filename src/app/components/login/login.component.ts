@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
     if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID') {
       this.validPass.authorise(this.passwordFormControl.value, this.emailFormControl.value).subscribe(res => {
         localStorage.setItem('token', res.token);
+        this.validPass.emitUserEvent(res.token);
         this.route.navigate(['./']);
       }, error => {
         console.log(error);

@@ -3,12 +3,15 @@ import {Observable} from 'rxjs/internal/Observable';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserModel} from '../models/UserModel';
+import {BehaviorSubject} from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ValidationApiService {
   private apiUrl =environment.api_url_my;
-
+  private userGet:BehaviorSubject <string> = new BehaviorSubject<string>('');
+  public userEvent = this.userGet.asObservable();
   constructor(
     private  http: HttpClient,
   ) {
@@ -51,6 +54,11 @@ export class ValidationApiService {
       "Content-Type":"application/json",
     });
     return this.http.get<UserModel>(`http://localhost:1111/userGet`, { headers: header })
+  }
+
+
+  emitUserEvent(token:string):void{
+    this.userGet.next(token)
   }
 
 }

@@ -34,6 +34,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SearchMusicPipe } from './pipes/search-music.pipe';
 import { LoginComponent } from './components/login/login.component';
 import {MatIconModule} from '@angular/material';
+import {ToastrModule} from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,6 @@ import {MatIconModule} from '@angular/material';
         RoutingModule,
         HttpClientModule,
         FormsModule,
-        BrowserAnimationsModule,
         MatSelectModule,
         MatInputModule,
         MatButtonModule,
@@ -69,7 +70,9 @@ import {MatIconModule} from '@angular/material';
         NgxAudioPlayerModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        MatIconModule
+        MatIconModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()
     ],
   providers: [
     NewsService,
