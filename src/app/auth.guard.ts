@@ -2,17 +2,18 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 
+
 @Injectable({providedIn:'root'})
 export class AuthGuard implements CanActivate {
   constructor(
-    private router: Router
+    private router: Router,
+
   ) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (localStorage.getItem('token')) {
       return true;
@@ -25,4 +26,5 @@ export class AuthGuard implements CanActivate {
     }
 
   }
+
 }

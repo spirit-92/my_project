@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
         this.userToken = localStorage.getItem('token');
         this.http.getUser(this.userToken).subscribe((user: UserModel) => {
           this.user = user;
-        }, error => {
+          }, error => {
           console.log(error);
         });
       }

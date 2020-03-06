@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewChild,ElementRef,AfterViewInit} from '@angular/core';
-import { Track } from 'ngx-audio-player';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Track} from 'ngx-audio-player';
+import {ToastrService} from 'ngx-toastr';
+import {MusicService} from '../../services/music.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-music',
@@ -7,122 +10,64 @@ import { Track } from 'ngx-audio-player';
   styleUrls: ['./music.component.css']
 })
 
-export class MusicComponent implements OnInit,AfterViewInit {
-@ViewChild('searchMusic',{static:false}) searchMusic:ElementRef;
+export class MusicComponent implements OnInit {
+  @ViewChild('searchMusic', {static: false}) searchMusic: ElementRef;
+  @ViewChild('realFile', {static: false}) realFile: ElementRef;
+  @ViewChild('customButton', {static: false}) customButton: ElementRef;
+  @ViewChild('customText', {static: false}) customText: ElementRef;
   msaapDisplayTitle = true;
   msaapDisplayPlayList = true;
-  msaapPageSizeOptions = [5,10,15];
+  msaapPageSizeOptions = [5, 10, 15];
   msaapDisplayVolumeControls = true;
-  titleSearch:string ='';
+  titleSearch: string = '';
   // Material Style Advance Audio Player Playlist
 
-  msaapPlaylist: Track[] = [
-    {
-      title: 'Радио тапок - All Star',
-      link: 'assets/music/Радио тапок - All Star.mp3'
-    },
-    {
-      title: 'Радио тапок - Demon',
-      link: 'assets/music/Радио тапок - Demon.mp3'
-    },
-    {
-      title: 'Радио тапок - Gorillaz(Fell good)',
-      link: 'assets/music/Радио тапок - Gorillaz(Fell good).mp3'
-    },
-    {
-      title: 'Радио тапок - Gorillaz-Clint Eastwood',
-      link: 'assets/music/Радио тапок - Gorillaz-Clint Eastwood.mp3'
-    },
-    {
-      title: 'Радио тапок - I Hate Everythink',
-      link: 'assets/music/Радио тапок - I Hate Everythink.mp3'
-    },
-    {
-      title: 'Радио тапок - Imagine Dragons',
-      link: 'assets/music/Радио тапок - Imagine Dragons.mp3'
-    },
-    {
-      title: 'Радио тапок - It\'s My Life',
-      link: 'assets/music/Радио тапок - It\'s My Life.mp3'
-    },
-    {
-      title: 'Радио тапок - Linkin Park(In The End)',
-      link: 'assets/music/Радио тапок - Linkin Park(In The End).mp3'
-    },
-    {
-      title: 'Радио тапок - Linkin Park(Numb)',
-      link: 'assets/music/Радио тапок - Linkin Park(Numb).mp3'
-    },
-    {
-      title: 'Радио тапок - Night Witches',
-      link: 'assets/music/Радио тапок - Night Witches.mp3'
-    },
-    {
-      title: 'Радио тапок - Pain - shut your mouth',
-      link: 'assets/music/Радио тапок - Pain - shut your mouth.mp3'
-    },
-    {
-      title: 'Радио тапок - Pain',
-      link: 'assets/music/Радио тапок - Pain.mp3'
-    },
-    {
-      title: 'Радио тапок - Radioactive',
-      link: 'assets/music/Радио тапок - Radioactive.mp3'
-    },
-    {
-      title: 'Радио тапок - Rammstein -Mein Herz Brennt',
-      link: 'assets/music/Радио тапок - Rammstein -Mein Herz Brennt.mp3'
-    },
-    {
-      title: 'Радио тапок - Rammstein(Sun)',
-      link: 'assets/music/Радио тапок - Rammstein(Sun).mp3'
-    },
-    {
-      title: 'Радио тапок - Rammstein(я жду)',
-      link: 'assets/music/Радио тапок - Rammstein(я жду).mp3'
-    },
-    {
-      title: 'Радио тапок - Ramstain(Amerika)',
-      link: 'assets/music/Радио тапок - Ramstain(Amerika).mp3'
-    },
-    {
-      title: 'Rammstein- Du Hast',
-      link: 'assets/music/Rammstein- Du Hast.mp3'
-    },
-    {
-      title: 'Радио тапок - Stressed Out',
-      link: 'assets/music/Радио тапок - Stressed Out.mp3'
-    },
-    {
-      title: 'Радио тапок - Witchcraft',
-      link: 'assets/music/Радио тапок - Witchcraft.mp3'
-    },
-    {
-      title: 'Радио тапок - Бог и Дьявол',
-      link: 'assets/music/Радио тапок - Бог и Дьявол.mp3'
-    },
-    {
-      title: 'Радио тапок - все мои друзья входят во вкус',
-      link: 'assets/music/Радио тапок - все мои друзья входят во вкус.mp3'
-    },
-    {
-      title: 'Радио тапок - Одинокий день',
-      link: 'assets/music/Радио тапок - Одинокий день.mp3'
-    },
-    {
-      title: 'Радио тапок -Металика',
-      link: 'assets/music/Радио тапок -Металика.mp3'
-    },
-    {
-      title: 'Би 2 - Легион',
-      link: 'assets/music/Би 2 - Легион.mp3'
-    },
-  ];
-  constructor() {}
-  ngOnInit() {}
-  ngAfterViewInit(){}
+  msaapPlaylist: Track[];
+  local = environment.api_url_my;
+  constructor(
+    public toastr: ToastrService,
+    private httpMusic: MusicService
+  ) {
+  }
 
-  onfocus(){
-    this.searchMusic.nativeElement.placeholder=''
+  ngOnInit() {
+    this.httpMusic.getMusic().subscribe((res:Track[]) =>{
+      res.forEach(item =>{
+        item.link = this.local+item.link
+      });
+      this.msaapPlaylist = res;
+    })
+  }
+
+
+
+  onfocus() {
+    this.searchMusic.nativeElement.placeholder = '';
+  }
+  focusout(){
+    if (!this.searchMusic.nativeElement.value){
+      this.searchMusic.nativeElement.placeholder = 'search Music'
+    }
+  }
+  chooseFile() {
+    this.getRealFile();
+  }
+
+  getRealFile() {
+    if (this.realFile.nativeElement.value) {
+      this.customText.nativeElement.innerHTML = this.realFile.nativeElement.value.match(
+        /[\/\\]([\w\d\s\.\-\(\)]+)$/
+      )[1];
+    } else {
+      this.customText.nativeElement.innerHTML = 'No music chosen, yet.';
+    }
+  }
+
+  onSubmit() {
+    if (this.realFile.nativeElement.files.length > 10) {
+      this.toastr.error('аксимально загрузить можно 10 треков');
+    } else {
+      this.toastr.success('ok');
+    }
   }
 }

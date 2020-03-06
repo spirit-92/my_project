@@ -77,6 +77,9 @@ export class NewsComponent implements OnInit {
     this.news_service.getNews().subscribe((posts: PostNews) => {
       //создаем точки для пагинации
       this.count = new Array(Math.ceil(posts.articles.length / 7));
+      if (posts.articles.length<7){
+        this.count=[]
+      }
       // обрезаем текст
       posts = this.textClipping(posts);
       this.postsAll = posts.articles;
@@ -92,7 +95,7 @@ export class NewsComponent implements OnInit {
   //Запрос на получение новостей по странам и категориям
   onSubmit() {
     this.news_service.getNewsCountryCategory(this.countrySelect, this.categorySelect).subscribe((posts: PostNews) => {
-      console.log(posts);
+
       if (posts.articles.length === 0) {
         this.count = new Array(Math.ceil(posts.articles.length / 7));
         this.postsAll = posts.articles;
@@ -101,8 +104,10 @@ export class NewsComponent implements OnInit {
       } else {
         //создаем точки для пагинации
         this.count = new Array(Math.ceil(posts.articles.length / 7));
+        if (posts.articles.length<7){
+          this.count=[]
+        }
         // обрезаем текст
-
         posts = this.textClipping(posts);
         this.postsAll = posts.articles;
         this.posts = posts.articles;
@@ -124,6 +129,9 @@ export class NewsComponent implements OnInit {
       } else {
         //создаем точки для пагинации
         this.count = new Array(Math.ceil(posts.articles.length / 7));
+        if (posts.articles.length<7){
+          this.count=[]
+        }
         // обрезаем текст
         posts = this.textClipping(posts);
         this.postsAll = posts.articles;
@@ -170,11 +178,10 @@ export class NewsComponent implements OnInit {
   }
 
   saveNews(card) {
-    this.toastr.success('Hello world!', 'Toastr fun!');
     this.news_service.saveNews(localStorage.getItem('token'), card).subscribe(res => {
-      console.log(res);
+      this.toastr.success('save news');
       }, error => {
-      console.log(error);
+      this.toastr.error('this news has already been added');
     });
   }
 }

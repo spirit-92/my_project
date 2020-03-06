@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MySlicePipe implements PipeTransform {
 
-  transform(value: string[]): any {
+  transform(value: any[]): any {
     if (value != undefined &&value.length >7 ){
       let postSlice =  value.slice(0,7);
       return postSlice;
