@@ -18,7 +18,7 @@ export class MusicComponent implements OnInit,AfterViewInit {
 
   msaapPlaylist: Track[] = [
     {
-      title: 'Радио тапок - All Star',
+      title: `Радио тапок - All Star`,
       link: 'assets/music/Радио тапок - All Star.mp3'
     },
     {
