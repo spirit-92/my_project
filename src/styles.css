@@ -117,3 +117,21 @@ td.mat-cell{
   background: #52bea6;
 }
 
+.saveMusic{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  -webkit-transition: .8s all;
+  transition: .8s all;
+  padding: 10px;
+  color: white;
+  background-color: #4c4c4c;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+
+}
+.saveMusic:hover {
+  background-color: #fcfcfc;
+  color: #4c4c4c;
+}

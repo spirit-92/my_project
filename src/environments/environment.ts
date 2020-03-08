@@ -10,6 +10,7 @@ export const environment = {
   api_url_Weather:'https://api.openweathermap.org/data/2.5/forecast?lat=51.30&lon=31.18&',
   api_url_my:'https://80bf672b.ngrok.io'
   // api_url_my:'http://localhost:1111'
+  // api_url_my:'https://80bf672b.ngrok.io'
 };
 
 /*

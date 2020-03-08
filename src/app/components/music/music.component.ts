@@ -42,7 +42,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // console.log(this.progressBar)
     this.spinner.show();
     this.httpMusic.getMusic().subscribe((res: Track[]) => {
       res.forEach(item => {
@@ -96,12 +95,13 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    this.showProgress = true;
-    if (this.realFile.nativeElement.files.length > 10) {
+    if (this.saveAudio.length> 10) {
       this.toastr.error('аксимально загрузить можно 10 треков');
       this.ulTrek.remove();
+      this.saveAudio= [];
       return;
-    } else {
+    } else if(this.saveAudio.length !== 0){
+      this.showProgress = true;
       const fb = new FormData;
       for (let i = 0; i < this.saveAudio.length; i++) {
         fb.append('audio[]', this.saveAudio[i], this.saveAudio[i].name);
@@ -111,8 +111,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = event.loaded / event.total * 100;
         } else if (event.type === HttpEventType.Response) {
+          this.saveAudio= [];
           this.showProgress = false;
-
           if (event.body.status.error) {
             event.body.status.error.forEach(error => {
               this.toastr.error(error);
@@ -121,14 +121,18 @@ export class MusicComponent implements OnInit, AfterViewInit {
           if (event.body.status.success) {
             event.body.status.success.forEach(success => {
               this.toastr.success(success);
+              this.saveAudio= [];
             });
           }
           if (this.ulTrek) {
             this.ulTrek.remove();
           }
+          this.saveAudio= [];
           this.ngOnInit();
         }
       }, error => {
+        this.saveAudio= [];
+        this.realFile.nativeElement.files = null;
         for (let i = 0; i < this.saveAudio.length; i++) {
           this.toastr.error(error.error.errors[`audio.${i}`][0], error.status);
         }
@@ -137,6 +141,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
         }
       });
     }
+    this.realFile.nativeElement.files = null;
   }
 
   ngAfterViewInit(): void {
