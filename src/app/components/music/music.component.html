@@ -11,7 +11,7 @@
         <div #customText id="custom-text">save your music</div>
         <mat-progress-bar *ngIf="showProgress" #bar style="width: 100px;height: 10px;" mode="determinate" value={{progress}}></mat-progress-bar>
       </label>
-      <button  class="btn-saveMusic" type="submit">Save music</button>
+      <button [ngClass]="{ disableBtn:showProgress}" [disabled]="showProgress ? 'disabled': null" class="btn-saveMusic" type="submit">Save music</button>
     </form>
 
     <input (focusout)="focusout()" (focus)="onfocus()" #searchMusic [(ngModel)]="titleSearch" title="searchMusic" class="searchMusic" type="text" placeholder="Search music">

@@ -38,6 +38,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
     private spinner: NgxSpinnerService,
     private httpMusic: MusicService
   ) {
+
   }
 
   ngOnInit() {
