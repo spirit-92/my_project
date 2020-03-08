@@ -17,17 +17,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public http: ValidationApiService,
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.http.userEvent.subscribe((res: string) => {
       this.userToken = res;
-      if (this.userToken||localStorage.getItem('token')) {
+      if (this.userToken || localStorage.getItem('token')) {
         this.userToken = localStorage.getItem('token');
         this.http.getUser(this.userToken).subscribe((user: UserModel) => {
           this.user = user;
-          }, error => {
+        }, error => {
           console.log(error);
         });
       }
@@ -35,4 +34,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  LogOut() {
+    localStorage.removeItem('token');
+    location.reload();
+  }
 }
+

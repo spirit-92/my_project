@@ -88,19 +88,19 @@ export class MusicComponent implements OnInit, AfterViewInit {
         this.customText.nativeElement.innerHTML = 'Save music';
       }
     } else {
-      this.toastr.error('аксимально загрузить можно 10 треков');
+      this.toastr.error('максимально загрузить можно 10 треков');
 
     }
 
   }
 
   onSubmit() {
-    if (this.saveAudio.length> 10) {
-      this.toastr.error('аксимально загрузить можно 10 треков');
+    if (this.saveAudio.length > 10) {
+      this.toastr.error('максимально загрузить можно 10 треков');
       this.ulTrek.remove();
-      this.saveAudio= [];
+      this.saveAudio = [];
       return;
-    } else if(this.saveAudio.length !== 0){
+    } else if (this.saveAudio.length !== 0) {
       this.showProgress = true;
       const fb = new FormData;
       for (let i = 0; i < this.saveAudio.length; i++) {
@@ -111,7 +111,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = event.loaded / event.total * 100;
         } else if (event.type === HttpEventType.Response) {
-          this.saveAudio= [];
+          this.saveAudio = [];
           this.showProgress = false;
           if (event.body.status.error) {
             event.body.status.error.forEach(error => {
@@ -121,27 +121,31 @@ export class MusicComponent implements OnInit, AfterViewInit {
           if (event.body.status.success) {
             event.body.status.success.forEach(success => {
               this.toastr.success(success);
-              this.saveAudio= [];
+              this.saveAudio = [];
             });
           }
           if (this.ulTrek) {
             this.ulTrek.remove();
           }
-          this.saveAudio= [];
+          this.saveAudio = [];
           this.ngOnInit();
         }
       }, error => {
-        this.saveAudio= [];
-        this.realFile.nativeElement.files = null;
-        for (let i = 0; i < this.saveAudio.length; i++) {
-          this.toastr.error(error.error.errors[`audio.${i}`][0], error.status);
-        }
-        if (this.ulTrek) {
-          this.ulTrek.remove();
+        this.showProgress = false;
+        if (error.status === 0) {
+          this.toastr.error('has been blocked by CORS policy: No \'Access-Control-Allow-Origin\' header is present on the requested resource.', error.status);
+        } else {
+          for (let i = 0; i < this.saveAudio.length; i++) {
+            this.toastr.error(error.error.errors[`audio.${i}`][0], error.status);
+          }
+          this.saveAudio = [];
+          if (this.ulTrek) {
+            this.ulTrek.remove();
+          }
         }
       });
     }
-    this.realFile.nativeElement.files = null;
+
   }
 
   ngAfterViewInit(): void {
