@@ -28,10 +28,9 @@ export class HeaderComponent implements OnInit {
           this.user = user;
         }, error => {
           console.log(error);
-        });
+        })
       }
-    });
-
+    })
   }
 
   LogOut() {
