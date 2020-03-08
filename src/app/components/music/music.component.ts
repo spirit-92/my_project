@@ -1,8 +1,10 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, QueryList} from '@angular/core';
 import {Track} from 'ngx-audio-player';
 import {ToastrService} from 'ngx-toastr';
 import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-music',
@@ -10,64 +12,143 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./music.component.css']
 })
 
-export class MusicComponent implements OnInit {
+export class MusicComponent implements OnInit, AfterViewInit {
   @ViewChild('searchMusic', {static: false}) searchMusic: ElementRef;
   @ViewChild('realFile', {static: false}) realFile: ElementRef;
   @ViewChild('customButton', {static: false}) customButton: ElementRef;
   @ViewChild('customText', {static: false}) customText: ElementRef;
+  @ViewChild('saveBtn', {static: false}) saveBtn: ElementRef;
+  @ViewChild('bar', {static: false}) progressBar: ElementRef;
+
   msaapDisplayTitle = true;
   msaapDisplayPlayList = true;
   msaapPageSizeOptions = [5, 10, 15];
   msaapDisplayVolumeControls = true;
   titleSearch: string = '';
   // Material Style Advance Audio Player Playlist
-
+  saveAudio = [];
   msaapPlaylist: Track[];
   local = environment.api_url_my;
+  ulTrek;
+  progress = 0;
+  showProgress = false;
+
   constructor(
     public toastr: ToastrService,
+    private spinner: NgxSpinnerService,
     private httpMusic: MusicService
   ) {
+
   }
 
   ngOnInit() {
-    this.httpMusic.getMusic().subscribe((res:Track[]) =>{
-      res.forEach(item =>{
-        item.link = this.local+item.link
+    this.spinner.show();
+    this.httpMusic.getMusic().subscribe((res: Track[]) => {
+      res.forEach(item => {
+        item.link = this.local + '/' + item.link;
       });
       this.msaapPlaylist = res;
-    })
+      this.spinner.hide();
+    });
+    this.spinner.hide();
   }
-
 
 
   onfocus() {
     this.searchMusic.nativeElement.placeholder = '';
   }
-  focusout(){
-    if (!this.searchMusic.nativeElement.value){
-      this.searchMusic.nativeElement.placeholder = 'search Music'
+
+  focusout() {
+    if (!this.searchMusic.nativeElement.value) {
+      this.searchMusic.nativeElement.placeholder = 'search Music';
     }
   }
+
   chooseFile() {
     this.getRealFile();
+    this.saveAudio = [];
+    this.realFile.nativeElement.files = null;
   }
 
   getRealFile() {
-    if (this.realFile.nativeElement.value) {
-      this.customText.nativeElement.innerHTML = this.realFile.nativeElement.value.match(
-        /[\/\\]([\w\d\s\.\-\(\)]+)$/
-      )[1];
-    } else {
-      this.customText.nativeElement.innerHTML = 'No music chosen, yet.';
+    if (this.ulTrek) {
+      this.ulTrek.remove();
     }
+    if (this.realFile.nativeElement.files.length < 11) {
+      if (this.realFile.nativeElement.value) {
+        this.ulTrek = document.createElement('ul');
+        for (let i = 0; i < this.realFile.nativeElement.files.length; i++) {
+          let li = document.createElement('li');
+          li.innerText = this.realFile.nativeElement.files[i].name;
+          this.ulTrek.appendChild(li);
+          this.saveAudio.push(this.realFile.nativeElement.files[i]);
+        }
+        this.customText.nativeElement.appendChild(this.ulTrek);
+      } else {
+        this.customText.nativeElement.innerHTML = 'Save music';
+      }
+    } else {
+      this.toastr.error('аксимально загрузить можно 10 треков');
+
+    }
+
   }
 
   onSubmit() {
-    if (this.realFile.nativeElement.files.length > 10) {
+    if (this.saveAudio.length> 10) {
       this.toastr.error('аксимально загрузить можно 10 треков');
-    } else {
-      this.toastr.success('ok');
+      this.ulTrek.remove();
+      this.saveAudio= [];
+      return;
+    } else if(this.saveAudio.length !== 0){
+      this.showProgress = true;
+      const fb = new FormData;
+      for (let i = 0; i < this.saveAudio.length; i++) {
+        fb.append('audio[]', this.saveAudio[i], this.saveAudio[i].name);
+      }
+
+      this.httpMusic.saveMusic(fb).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = event.loaded / event.total * 100;
+        } else if (event.type === HttpEventType.Response) {
+          this.saveAudio= [];
+          this.showProgress = false;
+          if (event.body.status.error) {
+            event.body.status.error.forEach(error => {
+              this.toastr.error(error);
+            });
+          }
+          if (event.body.status.success) {
+            event.body.status.success.forEach(success => {
+              this.toastr.success(success);
+              this.saveAudio= [];
+            });
+          }
+          if (this.ulTrek) {
+            this.ulTrek.remove();
+          }
+          this.saveAudio= [];
+          this.ngOnInit();
+        }
+      }, error => {
+        this.saveAudio= [];
+        this.realFile.nativeElement.files = null;
+        for (let i = 0; i < this.saveAudio.length; i++) {
+          this.toastr.error(error.error.errors[`audio.${i}`][0], error.status);
+        }
+        if (this.ulTrek) {
+          this.ulTrek.remove();
+        }
+      });
     }
+    this.realFile.nativeElement.files = null;
+  }
+
+  ngAfterViewInit(): void {
+    this.saveBtn.nativeElement.addEventListener('click', function(e) {
+      if (e.target.classList.contains('saveMusic')) {
+        console.log(e.path[2].cells[0].textContent);
+      }
+    });
   }
 }

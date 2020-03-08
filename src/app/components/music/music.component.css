@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+
 }
 .btn-saveMusic{
   margin-right: 10px;
@@ -71,4 +71,7 @@
 .btn-saveMusic:hover {
   background-color: #fcfcfc;
   color: #4c4c4c;
+}
+.disableBtn{
+  background: red;
 }
