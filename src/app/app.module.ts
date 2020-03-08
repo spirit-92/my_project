@@ -33,7 +33,7 @@ import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {SearchMusicPipe} from './pipes/search-music.pipe';
 import {LoginComponent} from './components/login/login.component';
-import {MatIconModule} from '@angular/material';
+import {MatIconModule, MatProgressBarModule} from '@angular/material';
 import {ToastrModule} from 'ngx-toastr';
 import {FavoritesNewsComponent} from './components/favorites-news/favorites-news.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
@@ -58,26 +58,27 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     FavoritesNewsComponent
 
   ],
-  imports: [
-    BrowserModule,
-    RoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MatSelectModule,
-    MatInputModule,
-    MatButtonModule,
-    MatRadioModule,
-    MatCardModule,
-    MatMenuModule,
-    NgxSpinnerModule,
-    NgxAudioPlayerModule,
-    FontAwesomeModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    ImageCropperModule
-  ],
+    imports: [
+        BrowserModule,
+        RoutingModule,
+        HttpClientModule,
+        FormsModule,
+        MatSelectModule,
+        MatInputModule,
+        MatButtonModule,
+        MatRadioModule,
+        MatCardModule,
+        MatMenuModule,
+        NgxSpinnerModule,
+        NgxAudioPlayerModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        ImageCropperModule,
+        MatProgressBarModule
+    ],
   providers: [
     NewsService,
 

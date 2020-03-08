@@ -28,6 +28,10 @@ export class MusicService {
     const header = new HttpHeaders({
       'token': this.token,
     });
-    return this.http.post<any[]>(`${this.apiUrl}/saveMusic`, music,{headers:header});
+    return this.http.post<any[]>(`${this.apiUrl}/saveMusic`, music, {
+      headers: header,
+      reportProgress: true,
+      observe:'events'
+    });
   }
 }

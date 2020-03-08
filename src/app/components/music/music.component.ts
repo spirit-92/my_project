@@ -4,6 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-music',
@@ -17,6 +18,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
   @ViewChild('customButton', {static: false}) customButton: ElementRef;
   @ViewChild('customText', {static: false}) customText: ElementRef;
   @ViewChild('saveBtn', {static: false}) saveBtn: ElementRef;
+  @ViewChild('bar', {static: false}) progressBar: ElementRef;
 
   msaapDisplayTitle = true;
   msaapDisplayPlayList = true;
@@ -28,6 +30,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
   msaapPlaylist: Track[];
   local = environment.api_url_my;
   ulTrek;
+  progress = 0;
+  showProgress = false;
 
   constructor(
     public toastr: ToastrService,
@@ -37,6 +41,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    // console.log(this.progressBar)
     this.spinner.show();
     this.httpMusic.getMusic().subscribe((res: Track[]) => {
       res.forEach(item => {
@@ -90,35 +95,38 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-
+    this.showProgress = true;
     if (this.realFile.nativeElement.files.length > 10) {
       this.toastr.error('аксимально загрузить можно 10 треков');
       this.ulTrek.remove();
       return;
     } else {
-      this.spinner.show();
       const fb = new FormData;
       for (let i = 0; i < this.saveAudio.length; i++) {
         fb.append('audio[]', this.saveAudio[i], this.saveAudio[i].name);
       }
 
-      this.httpMusic.saveMusic(fb).subscribe(res => {
+      this.httpMusic.saveMusic(fb).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = event.loaded / event.total * 100;
+        } else if (event.type === HttpEventType.Response) {
+          this.showProgress = false;
 
-        if (res.status.error) {
-          res.status.error.forEach(error => {
-            this.toastr.error(error);
-          });
+          if (event.body.status.error) {
+            event.body.status.error.forEach(error => {
+              this.toastr.error(error);
+            });
+          }
+          if (event.body.status.success) {
+            event.body.status.success.forEach(success => {
+              this.toastr.success(success);
+            });
+          }
+          if (this.ulTrek) {
+            this.ulTrek.remove();
+          }
+          this.ngOnInit();
         }
-        if (res.status.success) {
-          res.status.success.forEach(success => {
-            this.toastr.success(success);
-          });
-        }
-        if (this.ulTrek) {
-          this.ulTrek.remove();
-        }
-        this.ngOnInit();
-        this.spinner.hide();
       }, error => {
         for (let i = 0; i < this.saveAudio.length; i++) {
           this.toastr.error(error.error.errors[`audio.${i}`][0], error.status);
@@ -126,18 +134,15 @@ export class MusicComponent implements OnInit, AfterViewInit {
         if (this.ulTrek) {
           this.ulTrek.remove();
         }
-        this.spinner.hide();
       });
-      this.spinner.hide();
     }
-    this.spinner.hide();
   }
 
   ngAfterViewInit(): void {
-    this.saveBtn.nativeElement.addEventListener('click',function(e) {
-      if (e.target.classList.contains('saveMusic')){
-          console.log(e.path[2].cells[0].textContent)
+    this.saveBtn.nativeElement.addEventListener('click', function(e) {
+      if (e.target.classList.contains('saveMusic')) {
+        console.log(e.path[2].cells[0].textContent);
       }
-    })
+    });
   }
 }
