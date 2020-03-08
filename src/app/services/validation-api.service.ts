@@ -53,7 +53,7 @@ export class ValidationApiService {
       "token":token,
       "Content-Type":"application/json",
     });
-    return this.http.get<UserModel>(`http://localhost:1111/userGet`, { headers: header })
+    return this.http.get<UserModel>(`${this.apiUrl}/userGet`, { headers: header })
   }
 
 

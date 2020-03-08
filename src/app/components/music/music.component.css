@@ -12,6 +12,7 @@
   -moz-border-radius: 80px 80px 0 0;
   -webkit-border-radius: 80px 80px 0 0;
   border: 0 solid #000000;
+  margin-top: 200px;
 }
 .pos-music{
   display: flex;
@@ -36,7 +37,8 @@
   cursor: pointer;
   display: inline-block;
   margin-left: 10px;
-
+  max-height: 100px;
+  overflow: auto;
 }
 
 #custom-button:hover {

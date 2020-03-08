@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
 }
 .form-register{
   display: flex;
@@ -79,5 +80,16 @@
   width: 200px;
   height: 80px;
   background: #909690;
+
+}
+@media only screen  and (max-width : 500px) {
+  .form-register{
+    width: 200px;
+  }
+  .mat-h1{
+    font-size: 31px;
+    letter-spacing: 1.3px;
+    margin-bottom: 5px;
+  }
 
 }

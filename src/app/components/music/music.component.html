@@ -8,8 +8,8 @@
       <input name="music" hidden="hidden" (change)="getRealFile()" #realFile type="file" id="real-file" multiple />
       <label (click)="chooseFile()" #customButton  id="custom-button" for="real-file">
         CHOOSE A MUSIC
+        <mat-progress-bar *ngIf="showProgress" #bar style="height: 10px;" mode="determinate" value={{progress}}></mat-progress-bar>
         <div #customText id="custom-text">save your music</div>
-        <mat-progress-bar *ngIf="showProgress" #bar style="width: 100px;height: 10px;" mode="determinate" value={{progress}}></mat-progress-bar>
       </label>
       <button [ngClass]="{ disableBtn:showProgress}" [disabled]="showProgress ? 'disabled': null" class="btn-saveMusic" type="submit">Save music</button>
     </form>
