@@ -3,7 +3,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
 import {Router} from '@angular/router';
-
+import {ImageCroppedEvent} from 'ngx-image-cropper';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,13 +18,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  isUploadedFile =false;
   public errorEmail = [];
   public errorPassword = [];
   public errorName = [];
   public errorImg = [];
   public hide = true;
-  selectedFile: File = null;
+
 
   //Validation
   emailFormControl = new FormControl('', [
@@ -106,14 +108,34 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  onFileSelected(event) {
-    this.selectedFile = <File> event.target.files[0];
+  uploadFile(event) {
+    this.imageChangedEvent = event;
   }
 
+  imageCropped(event: ImageCroppedEvent) {
+    //Preview
+    this.croppedImage = event.base64;
+    //converting
+    const fileBeforeCrop = this.imageChangedEvent.target.files[0];
+  }
+
+  dataURItoBlob(dataURI): Blob {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    let ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
+
   onSubmit() {
+    const fileToUpload: File = new File([this.dataURItoBlob(this.croppedImage)], 'image');
     this.errorImg = [];
     const fb = new FormData;
-    fb.append('image', this.selectedFile);
+    fb.append('image', fileToUpload);
     if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID') {
       this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value, fb).subscribe(res => {
         localStorage.setItem('token', res.token);

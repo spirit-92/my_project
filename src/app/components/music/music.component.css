@@ -26,3 +26,49 @@
   padding: 5px 5px;
   font-size: 16px;
 }
+#custom-button {
+  transition:.8s all;
+  padding: 10px;
+  color: white;
+  background-color: #4c4c4c;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+
+}
+
+#custom-button:hover {
+  background-color: #fcfcfc;
+  color: #4c4c4c;
+}
+
+#custom-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+.audio-form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+.btn-saveMusic{
+  margin-right: 10px;
+  transition:.8s all;
+  padding: 10px;
+  color: white;
+  background-color: #4c4c4c;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+
+}
+.btn-saveMusic:hover {
+  background-color: #fcfcfc;
+  color: #4c4c4c;
+}

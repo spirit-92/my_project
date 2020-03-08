@@ -1,0 +1,80 @@
+<div class="main-my_project">
+  <div class="bg-news"   [ngStyle]="{'background' : 'url(./assets/img/news.jpg)','background-size': 'cover'}"></div>
+  <div *ngIf="placeholder" (click)="placeholderCard()" class="adaptive-placeholder_card"></div>
+  <div class="main">
+    <div class="control-news">
+      <div class="main-news">
+        <ul class="control-news__ul">
+          <li #li   style="position: relative" class="control-news__ul-li " *ngFor="let post of posts|mySlice;let myIndex = index"
+               (click)="cardCreate(post,myIndex)" [className]="lineActive === myIndex ? 'control-news__ul-li line_news-active ': 'control-news__ul-li'" >
+            <svg class="line_news" width="379" height="52" viewBox="0 0 379 52" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 1H345V51H0V1Z" fill="#323336"/>
+              <path d="M377 26L347 51.1147V0.885263L377 26Z" fill="#323336"/>
+            </svg>
+            <p style="position: absolute">{{post.title}}</p>
+          </li>
+          <li style="position: relative" class="control-news__ul-li" *ngIf="notFound">
+            <svg class="line_news" width="379" height="52" viewBox="0 0 379 52" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 1H345V51H0V1Z" fill="red"/>
+              <path d="M377 26L347 51.1147V0.885263L377 26Z" fill="red"/>
+            </svg>
+            <p style="position: absolute">Not Found</p>
+          </li>
+        </ul>
+        <ul class="dots-control">
+          <li *ngFor="let dots of count;let myIndex = index">
+            <div (click)="toggleNews(myIndex)"
+                 [className]="myIndex === countActiveDots ? 'dots-active': 'dots_nav'"></div>
+          </li>
+        </ul>
+      </div>
+      <!--card-->
+      <div class="line-news"></div>
+      <div *ngIf="card" class="main-card">
+        <mat-card>
+          <img class="img-card" src="{{card.img}}" alt="{{card.author}}">
+          <mat-card-content class="mat-content__card">
+            <mat-card-title style="padding: 10px" class="title-card">{{card.title}}</mat-card-title>
+            <div [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu" class="icon-card__dots">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <mat-menu style="display: none" #beforeMenu="matMenu"  xPosition="before">
+              <button mat-menu-item>
+                <span>Published : {{card.publish_news| date: 'dd.MM.yyyy'}}</span>
+              </button>
+              <button mat-menu-item>
+            <span>
+              <span>Author : {{card.author}}</span>
+            </span>
+              </button>
+              <button style="text-align: center" mat-menu-item>
+                <a style="color: white" href="{{card.url}}">Read more</a>
+              </button>
+            </mat-menu>
+          </mat-card-content>
+          <mat-card-actions class="card-actions">
+            <a class="hrefReadeMore" href="{{card.url}}" >
+              READE MORE
+            </a>
+            <button (click)="deleteNews(card)" class="btn-addNews__favorite">
+              <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="patch1" d="M25.8886 2.01759L18.8094 17.0142L2.97051 19.4268C0.130145 19.8572 -1.00817 23.5157 1.05164 25.6112L12.5107 37.2777L9.80041 53.7581C9.31256 56.737 12.3155 58.9684 14.8307 57.5752L29 49.7937L43.1693 57.5752C45.6845 58.957 48.6874 56.737 48.1996 53.7581L45.4893 37.2777L56.9484 25.6112C59.0082 23.5157 57.8699 19.8572 55.0295 19.4268L39.1906 17.0142L32.1114 2.01759C30.843 -0.655514 27.1679 -0.689494 25.8886 2.01759Z" fill="#323336"/>
+                <path class="patch2" d="M31.8802 27.8654H40.901C42.0079 27.8654 42.9056 28.7631 42.9056 29.87V31.8746C42.9056 32.9816 42.0079 33.8792 40.901 33.8792H31.8802H16.8457C15.7388 33.8792 14.8411 32.9816 14.8411 31.8746V29.87C14.8411 28.7631 15.7388 27.8654 16.8457 27.8654H31.8802Z" fill="#C4C4C4"/>
+              </svg>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+</div>

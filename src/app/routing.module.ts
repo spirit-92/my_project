@@ -7,13 +7,15 @@ import {PhilosophyComponent} from './components/philosophy/philosophy.component'
 import {RegistrationComponent} from './components/registration/registration.component';
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './components/login/login.component';
+import {FavoritesNewsComponent} from './components/favorites-news/favorites-news.component';
 
 
 const routes: Routes = [
-  {path: '', component: MusicComponent,canActivate:[AuthGuard]},
-  {path: 'news', component: NewsComponent,canActivate:[AuthGuard]},
-  {path: 'weather', component: WeatherComponent,canActivate:[AuthGuard]},
-  {path: 'philosophy', component: PhilosophyComponent,canActivate:[AuthGuard]},
+  {path: '', component: MusicComponent, canActivate: [AuthGuard]},
+  {path: 'news', component: NewsComponent, canActivate: [AuthGuard]},
+  {path: 'weather', component: WeatherComponent, canActivate: [AuthGuard]},
+  {path: 'philosophy', component: PhilosophyComponent, canActivate: [AuthGuard]},
+  {path: 'favoriteNews', component: FavoritesNewsComponent, canActivate: [AuthGuard]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
 ];

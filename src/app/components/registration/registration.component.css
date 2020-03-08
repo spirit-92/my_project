@@ -64,3 +64,20 @@
   margin-top: -15px;
 
 }
+.placeholder{
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: rgba(0,0,0,.6);
+  right: 0;
+  top: 0;
+}
+.cropImg{
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  width: 200px;
+  height: 80px;
+  background: #909690;
+
+}

@@ -2,10 +2,20 @@
 <div class="bg-music" [ngStyle]="{'background' : 'url(./assets/img/bg-music.jpg)','background-size': 'cover'}"></div>
 
 
-  <div style="max-width: 800px" class="audio">
+  <div  style="max-width: 800px" class="audio">
     <img src="./assets/music/Music-bg.png" alt="">
-    <input (focus)="onfocus()" #searchMusic [(ngModel)]="titleSearch" title="searchMusic" class="searchMusic" type="text" placeholder="Search music">
-  <mat-advanced-audio-player [playlist]="msaapPlaylist |searchMusic:titleSearch" [displayTitle]="msaapDisplayTitle"
+    <form (ngSubmit)="onSubmit()" class="audio-form" action="#">
+      <input name="music" hidden="hidden" (change)="getRealFile()" #realFile type="file" id="real-file" multiple />
+      <label (click)="chooseFile()" #customButton  id="custom-button" for="real-file">
+        CHOOSE A MUSIC
+        <span #customText id="custom-text">save your music</span>
+      </label>
+
+      <button class="btn-saveMusic" type="submit">Save music</button>
+    </form>
+
+    <input (focusout)="focusout()" (focus)="onfocus()" #searchMusic [(ngModel)]="titleSearch" title="searchMusic" class="searchMusic" type="text" placeholder="Search music">
+  <mat-advanced-audio-player *ngIf="msaapPlaylist"  [playlist]="msaapPlaylist |searchMusic:titleSearch" [displayTitle]="msaapDisplayTitle"
                              [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
                              [expanded]="true" [displayVolumeControls]="true">
   </mat-advanced-audio-player>
