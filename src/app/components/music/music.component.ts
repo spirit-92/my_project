@@ -150,7 +150,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.renderer.listen(this.saveBtn.nativeElement, 'click', (event) => {
-
+      console.log(event.target);
       if (event.target.classList.contains('saveMusic')) {
           event.target.disabled= true;
          event.target.style.background = '#fcfcfc';
