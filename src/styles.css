@@ -136,3 +136,6 @@ td.mat-cell{
   color: #4c4c4c;
 }
 
+.cdk-column-title {
+  width: 100%;
+}

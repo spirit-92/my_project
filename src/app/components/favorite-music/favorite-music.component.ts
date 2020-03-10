@@ -64,11 +64,10 @@ export class FavoriteMusicComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.renderer.listen(this.deleteBtn.nativeElement, 'click', (event) => {
-      if (event.target.classList.contains('saveMusic')) {
-        event.target.disabled = true;
-        this.httpMusic.deleteFavoriteMusic(event.path[2].cells[0].textContent).subscribe(res =>{
-          let text = event.path[2].cells[0].textContent;
+    this.renderer.listen(this.deleteBtn.nativeElement, 'dblclick', (event) => {
+      if (event.target.tagName === 'TD') {
+        this.httpMusic.deleteFavoriteMusic(event.target.textContent).subscribe(res =>{
+          let text = event.target.textContent;
           let title;
           let playList = [];
           if (this.msaapPlaylist.length > 0) {

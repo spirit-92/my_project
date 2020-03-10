@@ -149,13 +149,10 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.renderer.listen(this.saveBtn.nativeElement, 'click', (event) => {
-      console.log(event.target);
-      if (event.target.classList.contains('saveMusic')) {
-          event.target.disabled= true;
-         event.target.style.background = '#fcfcfc';
-          event.target.style.color = '#4c4c4c';
-          this.httpMusic.saveUserMusic(event.path[2].cells[0].textContent).subscribe(res =>{
+    this.renderer.listen(this.saveBtn.nativeElement, 'dblclick', (event) => {
+      if (event.target.tagName === 'TD') {
+
+        this.httpMusic.saveUserMusic(event.target.textContent).subscribe(res =>{
             this.toastr.success(res.status)
           },error => {
             this.toastr.error(error.error.status)
