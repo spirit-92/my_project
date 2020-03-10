@@ -44,8 +44,8 @@ export class NavigationComponent implements OnInit {
   }
   LogOut(){
     localStorage.removeItem('token');
-    location.reload();
-    // this.route.navigate(['./registration'])
+    this.http.emitUserEvent('');
+    this.route.navigate(['./registration'])
   }
 }
 

@@ -41,9 +41,7 @@ export class RegistrationComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
-  fileFormControl = new FormControl('', [
-    Validators.required,
-  ]);
+
   matcher = new MyErrorStateMatcher();
 
   constructor(
@@ -132,22 +130,26 @@ export class RegistrationComponent implements OnInit {
 
 
   onSubmit() {
-    const fileToUpload: File = new File([this.dataURItoBlob(this.croppedImage)], 'image');
     this.errorImg = [];
-    const fb = new FormData;
-    fb.append('image', fileToUpload);
-    if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID') {
-      this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value, fb).subscribe(res => {
-        localStorage.setItem('token', res.token);
-        this.validPass.emitUserEvent(res.token);
-        this.route.navigate(['./']);
-      }, error => {
-        error.error.errors.image.forEach(error => {
-          this.errorImg.push(error);
+    if (this.croppedImage){
+      const fileToUpload: File = new File([this.dataURItoBlob(this.croppedImage)], 'image');
+      this.errorImg = [];
+      const fb = new FormData;
+      fb.append('image', fileToUpload);
+      if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID' && this.textFormControl.status === 'VALID') {
+        this.validPass.saveUser(this.textFormControl.value, this.passwordFormControl.value, this.emailFormControl.value, fb).subscribe(res => {
+          localStorage.setItem('token', res.token);
+          this.validPass.emitUserEvent(res.token);
+          this.route.navigate(['./']);
+        }, error => {
+          error.error.errors.image.forEach(error => {
+            this.errorImg.push(error);
+          });
         });
-      });
+      }
+    }else {
+      this.errorImg.push(['save img']);
     }
-
   }
 
 }

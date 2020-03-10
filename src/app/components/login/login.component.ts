@@ -40,9 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('token')){
+    this.validPass.getUser(localStorage.getItem('token')).subscribe(res =>{
       this.route.navigate(['./'])
-    }
+    });
+
   }
 
   password() {

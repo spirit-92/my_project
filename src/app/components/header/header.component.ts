@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ValidationApiService} from '../../services/validation-api.service';
 import {UserModel} from '../../models/UserModel';
 import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,25 +18,28 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public http: ValidationApiService,
+    public route: Router
   ) {}
 
   ngOnInit() {
     this.http.userEvent.subscribe((res: string) => {
       this.userToken = res;
       if (this.userToken || localStorage.getItem('token')) {
-        this.userToken = localStorage.getItem('token');
-        this.http.getUser(this.userToken).subscribe((user: UserModel) => {
+        this.http.getUser(localStorage.getItem('token')).subscribe((user: UserModel) => {
           this.user = user;
-        }, error => {
+          }, error => {
           console.log(error);
         })
+      }else {
+        this.user = null;
       }
     })
   }
 
   LogOut() {
     localStorage.removeItem('token');
-    location.reload();
+    this.http.emitUserEvent('');
+    this.route.navigate(['./registration']);
   }
 }
 

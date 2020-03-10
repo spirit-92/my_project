@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserModel} from '../models/UserModel';
 import {BehaviorSubject} from 'rxjs';
+import {map} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,10 @@ export class ValidationApiService {
   private apiUrl =environment.api_url_my;
   private userGet:BehaviorSubject <string> = new BehaviorSubject<string>('');
   public userEvent = this.userGet.asObservable();
+  private token = localStorage.getItem('token');
   constructor(
     private  http: HttpClient,
-  ) {
-  }
+  ) {}
 
   validatePassword(password: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/user?password=${password}`);
@@ -60,5 +62,13 @@ export class ValidationApiService {
   emitUserEvent(token:string):void{
     this.userGet.next(token)
   }
+  auth():Observable<any>{
+    const header = new HttpHeaders({
+      "token":localStorage.getItem('token'),
+      "Content-Type":"application/json",
+    });
 
+    return this.http.get<any>(`${this.apiUrl}/userGet`, { headers: header })
+
+  }
 }
