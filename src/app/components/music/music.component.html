@@ -1,7 +1,7 @@
 <div class="main-my_project pos-music">
 <div class="bg-music" [ngStyle]="{'background' : 'url(./assets/img/bg-music.jpg)','background-size': 'cover'}"></div>
 
-
+<h1>Double click save trek</h1>
   <div #saveBtn style="max-width: 800px" class="audio">
     <img src="./assets/music/Music-bg.png" alt="">
     <form (ngSubmit)="onSubmit()" class="audio-form" action="#">
@@ -18,7 +18,6 @@
   <mat-advanced-audio-player   *ngIf="msaapPlaylist"  [playlist]="msaapPlaylist |searchMusic:titleSearch" [displayTitle]="msaapDisplayTitle"
                              [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
                              [expanded]="true" [displayVolumeControls]="true">
-    <button>sd</button>
   </mat-advanced-audio-player>
   </div>
 

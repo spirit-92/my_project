@@ -16,9 +16,13 @@
 }
 .pos-music{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-
+h1{
+  margin-top: 50px;
+  font-size: 40px;
+}
 .searchMusic{
   color: black;
   display: flex;
