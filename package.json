@@ -5,11 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot --buildOptimizer",
+    "build": "ng build --prod --aot --build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod --aot --buildOptimizer"
+    "postinstall": "ng build --prod --aot --build"
   },
   "private": true,
   "dependencies": {

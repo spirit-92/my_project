@@ -135,3 +135,10 @@ td.mat-cell{
   background-color: #fcfcfc;
   color: #4c4c4c;
 }
+ td.mat-column-status::after{
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: red;
+  display: block;
+}
