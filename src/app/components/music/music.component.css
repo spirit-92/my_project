@@ -12,12 +12,11 @@
   -moz-border-radius: 80px 80px 0 0;
   -webkit-border-radius: 80px 80px 0 0;
   border: 0 solid #000000;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 .pos-music{
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .searchMusic{

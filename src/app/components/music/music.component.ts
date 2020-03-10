@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, QueryList} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
 import {Track} from 'ngx-audio-player';
 import {ToastrService} from 'ngx-toastr';
 import {MusicService} from '../../services/music.service';
@@ -17,7 +17,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
   @ViewChild('realFile', {static: false}) realFile: ElementRef;
   @ViewChild('customButton', {static: false}) customButton: ElementRef;
   @ViewChild('customText', {static: false}) customText: ElementRef;
-  @ViewChild('saveBtn', {static: false}) saveBtn: ElementRef;
+  @ViewChild('saveBtn', {static: true}) saveBtn: ElementRef;
   @ViewChild('bar', {static: false}) progressBar: ElementRef;
 
   msaapDisplayTitle = true;
@@ -36,7 +36,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
   constructor(
     public toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private httpMusic: MusicService
+    private httpMusic: MusicService,
+    public renderer :Renderer2
   ) {
 
   }
@@ -145,14 +146,20 @@ export class MusicComponent implements OnInit, AfterViewInit {
         }
       });
     }
-
   }
 
   ngAfterViewInit(): void {
-    this.saveBtn.nativeElement.addEventListener('click', function(e) {
-      if (e.target.classList.contains('saveMusic')) {
-        console.log(e.path[2].cells[0].textContent);
-      }
-    });
+    this.renderer.listen(this.saveBtn.nativeElement, 'click', (event) => {
+        if (event.target.classList.contains('saveMusic')) {
+          event.target.disabled= true;
+         event.target.style.background = '#fcfcfc';
+          event.target.style.color = '#4c4c4c';
+          this.httpMusic.saveUserMusic(event.path[2].cells[0].textContent).subscribe(res =>{
+            this.toastr.success(res.status)
+          },error => {
+            this.toastr.error(error.error.status)
+          })
+        }
+    })
   }
 }

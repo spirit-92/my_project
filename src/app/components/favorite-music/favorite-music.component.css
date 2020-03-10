@@ -1,0 +1,28 @@
+
+.bg-music{
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  left: 0;
+  z-index: -99;
+}
+.audio{
+  background: #ffffff;
+  border-radius: 80px 80px 0 0;
+  -moz-border-radius: 80px 80px 0 0;
+  -webkit-border-radius: 80px 80px 0 0;
+  border: 0 solid #000000;
+  margin-top: 100px;
+}
+.pos-music{
+  display: flex;
+  justify-content: center;
+}
+
+.searchMusic{
+  color: black;
+  display: flex;
+  margin: 10px auto;
+  padding: 5px 5px;
+  font-size: 16px;
+}

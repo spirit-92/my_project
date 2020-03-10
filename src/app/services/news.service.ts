@@ -14,6 +14,7 @@ export class NewsService {
   private apiUrlNews = environment.api_url_News;
   private apiKeyNews = environment.api_key_News;
   private apiUrlNewsFavorite = environment.api_url_my;
+
   constructor(
     private  http: HttpClient
   ) {
@@ -49,7 +50,7 @@ export class NewsService {
       "token":token,
       "Content-Type":"application/json",
     });
-    return this.http.post<any>(`http://localhost:1111/saveNews`,{
+    return this.http.post<any>(`${this.apiUrlNewsFavorite}/saveNews`,{
       'title' : card.title,
       'img' : card.urlToImage,
       "url" : card.url,

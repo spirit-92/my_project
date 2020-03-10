@@ -8,6 +8,7 @@ import {RegistrationComponent} from './components/registration/registration.comp
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './components/login/login.component';
 import {FavoritesNewsComponent} from './components/favorites-news/favorites-news.component';
+import {FavoriteMusicComponent} from './components/favorite-music/favorite-music.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'weather', component: WeatherComponent, canActivate: [AuthGuard]},
   {path: 'philosophy', component: PhilosophyComponent, canActivate: [AuthGuard]},
   {path: 'favoriteNews', component: FavoritesNewsComponent, canActivate: [AuthGuard]},
+  {path: 'favoriteMusic', component: FavoriteMusicComponent, canActivate: [AuthGuard]},
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
 ];

@@ -37,6 +37,8 @@ import {MatIconModule, MatProgressBarModule} from '@angular/material';
 import {ToastrModule} from 'ngx-toastr';
 import {FavoritesNewsComponent} from './components/favorites-news/favorites-news.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import { FavoriteMusicComponent } from './components/favorite-music/favorite-music.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     SearchMusicPipe,
     RegistrationComponent,
     LoginComponent,
-    FavoritesNewsComponent
+    FavoritesNewsComponent,
+    FavoriteMusicComponent,
+
 
   ],
     imports: [
@@ -81,7 +85,6 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     ],
   providers: [
     NewsService,
-
   ],
 
   bootstrap: [AppComponent]
