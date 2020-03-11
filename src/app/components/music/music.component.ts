@@ -56,6 +56,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
     });
     this.spinner.hide();
     this.httpGetUser.getUser().subscribe(res => {
+      console.log(res.user.status_id);
       this.statusUser = res.user.status_id;
     });
   }

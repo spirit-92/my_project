@@ -52,7 +52,7 @@ export class ValidationApiService {
   }
   getUser():Observable<UserModel>{
     const header = new HttpHeaders({
-      "token":this.token,
+      "token":localStorage.getItem('token'),
       "Content-Type":"application/json",
     });
     return this.http.get<UserModel>(`${this.apiUrl}/userGet`, { headers: header })
