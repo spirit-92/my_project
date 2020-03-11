@@ -3,7 +3,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
 import { Router } from '@angular/router';
-import {ToastrModule, ToastrService} from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.validPass.getUser(localStorage.getItem('token')).subscribe(res =>{
+    this.validPass.getUser().subscribe(res =>{
       this.route.navigate(['./'])
     });
 

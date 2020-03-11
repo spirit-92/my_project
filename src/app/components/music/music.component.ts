@@ -5,6 +5,7 @@ import {MusicService} from '../../services/music.service';
 import {environment} from '../../../environments/environment';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {HttpEventType} from '@angular/common/http';
+import {ValidationApiService} from '../../services/validation-api.service';
 
 @Component({
   selector: 'app-music',
@@ -32,12 +33,14 @@ export class MusicComponent implements OnInit, AfterViewInit {
   ulTrek;
   progress = 0;
   showProgress = false;
+  statusUser: number;
 
   constructor(
     public toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private httpMusic: MusicService,
-    public renderer :Renderer2
+    private httpGetUser: ValidationApiService,
+    public renderer: Renderer2
   ) {
 
   }
@@ -52,6 +55,9 @@ export class MusicComponent implements OnInit, AfterViewInit {
       this.spinner.hide();
     });
     this.spinner.hide();
+    this.httpGetUser.getUser().subscribe(res => {
+      this.statusUser = res.user.status_id;
+    });
   }
 
 
@@ -93,6 +99,18 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
     }
 
+  }
+
+  deleteMusic(music) {
+
+    this.httpMusic.deleteMusic(music.title).subscribe(res =>{
+      this.msaapPlaylist =  this.msaapPlaylist.filter(res => {
+        return res.index != music.index;
+      });
+      this.toastr.success('delete success')
+    },error => {
+      this.toastr.error('error delete')
+    })
   }
 
   onSubmit() {
@@ -152,12 +170,12 @@ export class MusicComponent implements OnInit, AfterViewInit {
     this.renderer.listen(this.saveBtn.nativeElement, 'dblclick', (event) => {
       if (event.target.tagName === 'TD') {
 
-        this.httpMusic.saveUserMusic(event.target.textContent).subscribe(res =>{
-            this.toastr.success(res.status)
-          },error => {
-            this.toastr.error(error.error.status)
-          })
-        }
-    })
+        this.httpMusic.saveUserMusic(event.target.textContent).subscribe(res => {
+          this.toastr.success(res.status);
+        }, error => {
+          this.toastr.error(error.error.status);
+        });
+      }
+    });
   }
 }

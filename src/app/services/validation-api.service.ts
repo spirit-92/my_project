@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserModel} from '../models/UserModel';
 import {BehaviorSubject} from 'rxjs';
-import {map} from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -50,9 +50,9 @@ export class ValidationApiService {
       'email': email
     });
   }
-  getUser(token:string):Observable<UserModel>{
+  getUser():Observable<UserModel>{
     const header = new HttpHeaders({
-      "token":token,
+      "token":this.token,
       "Content-Type":"application/json",
     });
     return this.http.get<UserModel>(`${this.apiUrl}/userGet`, { headers: header })

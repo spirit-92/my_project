@@ -19,6 +19,18 @@
                              [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
                              [expanded]="true" [displayVolumeControls]="true">
   </mat-advanced-audio-player>
+    <div class="deleteMusicList" *ngIf="statusUser == 1">
+      <h3 class="mat-h3">Delete music</h3>
+      <ul class="deleteMusic">
+        <li class="liDeleteMusic" *ngFor="let list of msaapPlaylist;let myIndex = index">
+          <div style="display: flex;align-items: center">
+          <span style="margin-left: 20px">{{myIndex+1+'.'}}</span>
+         <p>{{list.title}}</p>
+          </div>
+          <button (click)="deleteMusic(list)" class="btn-saveMusic deleteMusicBtn">Delete music</button>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <ngx-spinner

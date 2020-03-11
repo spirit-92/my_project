@@ -56,4 +56,11 @@ export class MusicService {
     });
     return  this.http.delete<any>(`${this.apiUrl}/deleteFavoriteMusic?title=${title}`,{headers: header});
   }
+  deleteMusic(title):Observable<any>{
+    const header = new HttpHeaders({
+      'token': this.token,
+      'Content-Type': 'application/json',
+    });
+    return this.http.delete<any>(`${this.apiUrl}/deleteMusic?title=${title}`,{headers: header});
+  }
 }
