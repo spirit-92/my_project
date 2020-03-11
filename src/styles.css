@@ -100,6 +100,7 @@ mat-expansion-panel{
 }
 td.mat-cell{
   border-bottom: 2px solid black;
+
 }
 
 .mat-header-row>th{
@@ -138,4 +139,18 @@ td.mat-cell{
 
 .cdk-column-title {
   width: 100%;
+  cursor: pointer;
+}
+.mat-column-status:before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background: #4c4c4c;
+  display: block;
+  position: absolute;
+  left: -12px;
+  top: 1px;
+}
+.mat-column-status{
+  position: relative;
 }
