@@ -12,7 +12,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./auth-cocial.component.css']
 })
 export class AuthCocialComponent implements OnInit {
-  private user: SocialUser;
+  private user:SocialUser;
   private loggedIn: boolean;
   @Input() AuthOrRegistration: boolean;
 
@@ -75,7 +75,44 @@ export class AuthCocialComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate)=>{
+      this.user = userDate;
+    }));
+    if (this.AuthOrRegistration) {
+      if (this.loggedIn){
+        this.http.authorise(this.user.id, this.user.email).subscribe(res =>{
+          localStorage.setItem('token', res.token);
+          this.http.emitUserEvent(res.token);
+          this.toast.success('ok');
+          this.route.navigate(['./']);
+        },error => {
+          if (error.error.errors.name) {
+            this.toast.error(error.error.errors.name);
+          }
+          if (error.error.errors.email) {
+            this.toast.error(error.error.errors.email);
+          }
+        })
+      }
+    } else {
+      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      if (this.loggedIn) {
+        this.http.saveUser(this.user.name, this.user.id, this.user.email, null, this.user.photoUrl).subscribe(res => {
+          localStorage.setItem('token', res.token);
+          this.http.emitUserEvent(res.token);
+          this.toast.success('ok');
+          this.route.navigate(['./']);
+        }, error => {
+          if (error.error.errors.name) {
+            this.toast.error(error.error.errors.name);
+          }
+          if (error.error.errors.email) {
+            this.toast.error(error.error.errors.email);
+          }
+        });
+      }
+    }
+
   }
 
   signOut(): void {
