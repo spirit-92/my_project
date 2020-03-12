@@ -4,9 +4,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
 import {Router} from '@angular/router';
 import {ImageCroppedEvent} from 'ngx-image-cropper';
-import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
-import { SocialUser } from "angularx-social-login";
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,8 +27,7 @@ export class RegistrationComponent implements OnInit {
   public errorName = [];
   public errorImg = [];
   public hide = true;
-  private user: SocialUser;
-  private loggedIn: boolean;
+
 
   //Validation
   emailFormControl = new FormControl('', [
@@ -51,31 +48,16 @@ export class RegistrationComponent implements OnInit {
   constructor(
     public validPass: ValidationApiService,
     public route: Router,
-    private authService: AuthService
+
   ) {}
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
       this.route.navigate(['./']);
     }
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log(this.user);
-      this.loggedIn = (user != null);
-    });
-  }
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
 
   }
 
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-
-  signOut(): void {
-    this.authService.signOut();
-  }
   password() {
     this.errorPassword = [];
     if (this.passwordFormControl.status === 'VALID') {

@@ -77,8 +77,7 @@
       <button routerLink="/login" style="margin-top: 40px" class="form-control form__register" mat-button
               color="accent">login
       </button>
-      <button (click)="signInWithGoogle()">google</button>
-      <button>facebook</button>
+    <app-auth-cocial></app-auth-cocial>
     </form>
     <div (click)="isUploadedFile = !isUploadedFile" *ngIf="isUploadedFile" class="placeholder">
       <button class="form__register cropImg" mat-button color="accent">Crop img

@@ -42,6 +42,7 @@ import {FavoriteMusicComponent} from './components/favorite-music/favorite-music
 //social login
 import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
 import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import { AuthCocialComponent } from './components/auth-cocial/auth-cocial.component';
 
 let config = new AuthServiceConfig([
   {
@@ -77,6 +78,7 @@ export function provideConfig() {
     LoginComponent,
     FavoritesNewsComponent,
     FavoriteMusicComponent,
+    AuthCocialComponent,
 
 
   ],
