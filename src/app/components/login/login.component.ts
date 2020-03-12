@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public errorEmail = [];
   public errorPassword = [];
   public  errorName = [];
-  private user: SocialUser;
+  private userAuth: SocialUser;
   private loggedIn: boolean;
   //Validation
   emailFormControl = new FormControl('', [
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       this.route.navigate(['./'])
     });
     this.authService.authState.subscribe((user) => {
-      this.user = user;
+      this.userAuth = user;
       this.loggedIn = (user != null);
     });
   }
