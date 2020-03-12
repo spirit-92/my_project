@@ -37,8 +37,26 @@ import {MatIconModule, MatProgressBarModule} from '@angular/material';
 import {ToastrModule} from 'ngx-toastr';
 import {FavoritesNewsComponent} from './components/favorites-news/favorites-news.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
-import { FavoriteMusicComponent } from './components/favorite-music/favorite-music.component';
+import {FavoriteMusicComponent} from './components/favorite-music/favorite-music.component';
 
+//social login
+import {SocialLoginModule, AuthServiceConfig} from 'angularx-social-login';
+import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('802964704175-ibkljbsbalst3m0s9b5f4lsnmau65kml.apps.googleusercontent.com')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('Facebook-App-Id')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -62,29 +80,34 @@ import { FavoriteMusicComponent } from './components/favorite-music/favorite-mus
 
 
   ],
-    imports: [
-        BrowserModule,
-        RoutingModule,
-        HttpClientModule,
-        FormsModule,
-        MatSelectModule,
-        MatInputModule,
-        MatButtonModule,
-        MatRadioModule,
-        MatCardModule,
-        MatMenuModule,
-        NgxSpinnerModule,
-        NgxAudioPlayerModule,
-        FontAwesomeModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot(),
-        ImageCropperModule,
-        MatProgressBarModule
-    ],
+  imports: [
+    BrowserModule,
+    RoutingModule,
+    HttpClientModule,
+    FormsModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatCardModule,
+    MatMenuModule,
+    NgxSpinnerModule,
+    NgxAudioPlayerModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    ImageCropperModule,
+    MatProgressBarModule,
+    SocialLoginModule
+  ],
   providers: [
     NewsService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
 
   bootstrap: [AppComponent]
