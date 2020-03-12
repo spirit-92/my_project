@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
   public errorEmail = [];
   public errorPassword = [];
   public  errorName = [];
+  @Input() AuthOrRegistration:boolean;
 
-  private loggedIn: boolean;
   //Validation
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.validPass.getUser().subscribe(res =>{
       this.route.navigate(['./'])
     });
-
+  this.AuthOrRegistration = true
   }
 
   password() {
@@ -92,7 +92,6 @@ export class LoginComponent implements OnInit {
         this.route.navigate(['./']);
       }, error => {
         this.toast.error(error)
-        // console.log(error);
         this.errorPassword.push(error.error.body);
       });
     }

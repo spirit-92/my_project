@@ -136,7 +136,7 @@
 .getUser{
   margin-right: 15px;
   display: flex;
-  width: 115px;
+  width: 160px;
   justify-content: space-between;
   align-items: center;
 }

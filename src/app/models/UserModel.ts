@@ -5,6 +5,7 @@ export interface UserModel {
     password: string,
     email: string,
     avatar: string,
+    avatarSocial:string,
     status_id: number,
     created_at: string
   }

@@ -34,8 +34,8 @@ export class ValidationApiService {
     return this.http.get<any>(`${this.apiUrl}/GetUserValid?email=${email}`);
   }
 
-  saveUser(name: string, password: string, email: string, image:any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/registration?name=${name}&password=${password}&email=${email}`,image);
+  saveUser(name: string, password: string, email: string, image:any = null,avatarSocial:string = null): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/registration?name=${name}&password=${password}&email=${email}&avatarSocial=${avatarSocial}`,image);
   }
   authorise(password: string, email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/authorise`, {

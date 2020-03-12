@@ -21,7 +21,8 @@
   </div>
   <div  *ngIf="user" class="getUser">
     <p> Hi  {{user.user.user_name}}</p>
-    <img style="width: 55px;height: 55px;border-radius: 50%;" src="{{local+user.user.avatar}}" alt="">
+    <img *ngIf="user.user.avatar" style="width: 55px;height: 55px;border-radius: 50%;" src="{{local+user.user.avatar}}" alt="">
+    <img *ngIf="user.user.avatarSocial" style="width: 55px;height: 55px;border-radius: 50%;" src="{{user.user.avatarSocial}}" alt="">
   </div>
 
 </header>

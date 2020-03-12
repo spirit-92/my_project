@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {ValidationApiService} from '../../services/validation-api.service';
@@ -27,7 +27,7 @@ export class RegistrationComponent implements OnInit {
   public errorName = [];
   public errorImg = [];
   public hide = true;
-
+  @Input() AuthOrRegistration:boolean;
 
   //Validation
   emailFormControl = new FormControl('', [
@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this.route.navigate(['./']);
     }
-
+    this.AuthOrRegistration = false
   }
 
   password() {
