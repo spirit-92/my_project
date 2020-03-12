@@ -47,15 +47,7 @@
       </button>
       <button routerLink="/registration" style="margin-top: 40px" class="form-control form__register" mat-button color="accent">Registration
       </button>
-      <button (click)="signInWithGoogle()" >login google</button>
-      <button>login facebook</button>
     </form>
-    <div *ngIf="user">
-    <img src="{{ user.photoUrl }}">
-    <div>
-      <h4>{{ user.name }}</h4>
-      <p>{{ user.email }}</p>
-    </div>
-    </div>
+
   </div>
 </div>
