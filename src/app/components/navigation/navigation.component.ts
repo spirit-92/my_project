@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import { Router } from '@angular/router';
 import {ValidationApiService} from '../../services/validation-api.service';
+import {AuthService} from 'angularx-social-login';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -14,7 +15,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private location: Location,
     public route: Router,
-    private http: ValidationApiService
+    private http2: ValidationApiService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -44,7 +46,8 @@ export class NavigationComponent implements OnInit {
   }
   LogOut(){
     localStorage.removeItem('token');
-    this.http.emitUserEvent('');
+    this.authService.signOut();
+    this.http2.emitUserEvent('');
     this.route.navigate(['./registration'])
   }
 }
