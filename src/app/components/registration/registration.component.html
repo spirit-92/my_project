@@ -71,17 +71,17 @@
           <p>{{error}}</p>
         </strong>
       </mat-error>
+      <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
       <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">
         register
       </button>
       <button routerLink="/login" style="margin-top: 40px" class="form-control form__register" mat-button
               color="accent">login
       </button>
-    <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
+
     </form>
     <div (click)="isUploadedFile = !isUploadedFile" *ngIf="isUploadedFile" class="placeholder">
-      <button class="form__register cropImg" mat-button color="accent">Crop img
-      </button>
+      <button class="form__register cropImg" mat-button color="accent">Crop img</button>
     </div>
     <image-cropper style="width: 600px;height: 600px;position: absolute"
                    *ngIf="isUploadedFile"

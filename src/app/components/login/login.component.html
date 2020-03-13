@@ -43,11 +43,11 @@
           {{error}}
         </strong>
       </mat-error>
+      <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
       <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">Login
       </button>
       <button routerLink="/registration" style="margin-top: 40px" class="form-control form__register" mat-button color="accent">Registration
       </button>
-      <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
     </form>
 
   </div>

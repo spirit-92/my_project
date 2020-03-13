@@ -1,0 +1,37 @@
+.social-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 25px 0;
+}
+.btn{
+  transition: all .8s;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 120px;
+  height: 40px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+.btn>div>svg{
+  width: 20px;
+  height: 20px;
+}
+.facebook_style{
+  background: #4864b4;
+}
+.google_style{
+  background:#d6420a;
+  margin-right: 15px;
+}
+
+.btn:hover{
+  transform: scale(1.1);
+  background: #fff;
+  color: #161616;
+}

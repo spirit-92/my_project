@@ -30,7 +30,7 @@ import {DegreeRoundingPipe} from './pipes/degree-rounding.pipe';
 import {NumberRoundingPipe} from './pipes/number-rounding.pipe';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {NgxAudioPlayerModule} from 'ngx-audio-player';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
 import {SearchMusicPipe} from './pipes/search-music.pipe';
 import {LoginComponent} from './components/login/login.component';
 import {MatIconModule, MatProgressBarModule} from '@angular/material';
@@ -95,14 +95,14 @@ export function provideConfig() {
     MatMenuModule,
     NgxSpinnerModule,
     NgxAudioPlayerModule,
-    FontAwesomeModule,
     ReactiveFormsModule,
     MatIconModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ImageCropperModule,
     MatProgressBarModule,
-    SocialLoginModule
+    SocialLoginModule,
+
   ],
   providers: [
     NewsService,

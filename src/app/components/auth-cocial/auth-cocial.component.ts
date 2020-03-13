@@ -16,6 +16,7 @@ export class AuthCocialComponent implements OnInit {
   private loggedIn: boolean;
   @Input() AuthOrRegistration: boolean;
 
+
   constructor(
     private authService: AuthService,
     private http: ValidationApiService,
@@ -34,84 +35,90 @@ export class AuthCocialComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(((userDate)=>{
+      this.user = userDate;
+      if (this.AuthOrRegistration) {
+        if (this.loggedIn){
+          this.http.authorise(userDate.id, userDate.email).subscribe(res =>{
+            localStorage.setItem('token', res.token);
+            this.http.emitUserEvent(res.token);
+            this.toast.success('ok');
+            this.route.navigate(['./']);
+          },error => {
+            console.log(error);
+            if (error.error.errors.name) {
+              this.toast.error(error.error.errors.name);
+            }
+            if (error.error.errors.email) {
+              this.toast.error(error.error.errors.email);
+            }
+          })
+        }
+      } else {
+        if (this.loggedIn) {
+          this.http.saveUser(userDate.name, userDate.id, userDate.email, null, userDate.photoUrl).subscribe(res => {
+            localStorage.setItem('token', res.token);
+            this.http.emitUserEvent(res.token);
+            this.toast.success('ok');
+            this.route.navigate(['./']);
+          }, error => {
+            console.log(error);
+            if (error.error.errors.name) {
+              this.toast.error(error.error.errors.name);
+            }
+            if (error.error.errors.email) {
+              this.toast.error(error.error.errors.email);
+            }
+          });
+        }
+      }
+    }));
 
-    if (this.AuthOrRegistration) {
-      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      console.log(this.user)
-      if (this.loggedIn){
-        this.http.authorise(this.user.id, this.user.email).subscribe(res =>{
-          localStorage.setItem('token', res.token);
-          this.http.emitUserEvent(res.token);
-          this.toast.success('ok');
-          this.route.navigate(['./']);
-        },error => {
-          if (error.error.errors.name) {
-            this.toast.error(error.error.errors.name);
-          }
-          if (error.error.errors.email) {
-            this.toast.error(error.error.errors.email);
-          }
-        })
-      }
-    } else {
-      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      if (this.loggedIn) {
-        this.http.saveUser(this.user.name, this.user.id, this.user.email, null, this.user.photoUrl).subscribe(res => {
-          localStorage.setItem('token', res.token);
-          this.http.emitUserEvent(res.token);
-          this.toast.success('ok');
-          this.route.navigate(['./']);
-        }, error => {
-          if (error.error.errors.name) {
-            this.toast.error(error.error.errors.name);
-          }
-          if (error.error.errors.email) {
-            this.toast.error(error.error.errors.email);
-          }
-        });
-      }
-    }
 
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate)=>{
       this.user = userDate;
+      if (this.AuthOrRegistration) {
+        if (this.loggedIn){
+          this.http.authorise(userDate.id, userDate.email).subscribe(res =>{
+            localStorage.setItem('token', res.token);
+            this.http.emitUserEvent(res.token);
+            this.toast.success('ok');
+            this.route.navigate(['./']);
+          },error => {
+            console.log(error);
+            if (error.error.errors.name) {
+              this.toast.error(error.error.errors.name);
+            }
+            if (error.error.errors.email) {
+              this.toast.error(error.error.errors.email);
+            }
+          })
+        }
+      } else {
+        console.log(this.user);
+        if (this.loggedIn) {
+          this.http.saveUser(userDate.name, userDate.id, userDate.email, null, userDate.photoUrl).subscribe(res => {
+            localStorage.setItem('token', res.token);
+            this.http.emitUserEvent(res.token);
+            this.toast.success('ok');
+            this.route.navigate(['./']);
+          }, error => {
+            console.log(error);
+            if (error.error.errors.name) {
+              this.toast.error(error.error.errors.name);
+            }
+            if (error.error.errors.email) {
+              this.toast.error(error.error.errors.email);
+            }
+          });
+        }
+      }
+
     }));
-    if (this.AuthOrRegistration) {
-      if (this.loggedIn){
-        this.http.authorise(this.user.id, this.user.email).subscribe(res =>{
-          localStorage.setItem('token', res.token);
-          this.http.emitUserEvent(res.token);
-          this.toast.success('ok');
-          this.route.navigate(['./']);
-        },error => {
-          if (error.error.errors.name) {
-            this.toast.error(error.error.errors.name);
-          }
-          if (error.error.errors.email) {
-            this.toast.error(error.error.errors.email);
-          }
-        })
-      }
-    } else {
-      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-      if (this.loggedIn) {
-        this.http.saveUser(this.user.name, this.user.id, this.user.email, null, this.user.photoUrl).subscribe(res => {
-          localStorage.setItem('token', res.token);
-          this.http.emitUserEvent(res.token);
-          this.toast.success('ok');
-          this.route.navigate(['./']);
-        }, error => {
-          if (error.error.errors.name) {
-            this.toast.error(error.error.errors.name);
-          }
-          if (error.error.errors.email) {
-            this.toast.error(error.error.errors.email);
-          }
-        });
-      }
-    }
+
 
   }
 
