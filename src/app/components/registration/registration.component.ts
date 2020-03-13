@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
   ]);
   textFormControl = new FormControl('', [
     Validators.required,
-    Validators.maxLength(8)
+    Validators.maxLength(30)
   ]);
   passwordFormControl = new FormControl('', [
     Validators.required,
