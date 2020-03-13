@@ -3,6 +3,7 @@ import {ValidationApiService} from '../../services/validation-api.service';
 import {UserModel} from '../../models/UserModel';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
+import {AuthService} from 'angularx-social-login';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public http: ValidationApiService,
-    public route: Router
+    public route: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   LogOut() {
     localStorage.removeItem('token');
+    this.authService.signOut();
     this.http.emitUserEvent('');
     this.route.navigate(['./registration']);
   }
