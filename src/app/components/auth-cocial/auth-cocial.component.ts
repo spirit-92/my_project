@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from 'angularx-social-login';
 import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
 import {ValidationApiService} from '../../services/validation-api.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-
+import {NgxSpinnerService} from 'ngx-spinner';
 @Component({
   selector: 'app-auth-cocial',
   templateUrl: './auth-cocial.component.html',
@@ -22,19 +22,22 @@ export class AuthCocialComponent implements OnInit {
     private http: ValidationApiService,
     public route: Router,
     public toast: ToastrService,
+    private spinner: NgxSpinnerService,
   ) {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.authService.authState.subscribe((user) => {
       this.user = user;
 
       this.loggedIn = (user != null);
     });
-    console.log(this.user)
+    this.spinner.hide();
   }
 
   signInWithGoogle(): void {
+    this.spinner.show();
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(((userDate)=>{
       this.user = userDate;
       if (this.AuthOrRegistration) {
@@ -73,7 +76,7 @@ export class AuthCocialComponent implements OnInit {
         }
       }
     }));
-
+    this.spinner.hide();
 
   }
 

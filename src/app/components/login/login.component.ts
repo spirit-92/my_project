@@ -82,8 +82,6 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
-
   onSubmit() {
     if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID') {
       this.validPass.authorise(this.passwordFormControl.value, this.emailFormControl.value).subscribe(res => {
@@ -91,7 +89,6 @@ export class LoginComponent implements OnInit {
         this.validPass.emitUserEvent(res.token);
         this.route.navigate(['./']);
       }, error => {
-        this.toast.error(error)
         this.errorPassword.push(error.error.body);
       });
     }
