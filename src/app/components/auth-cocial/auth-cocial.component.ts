@@ -86,7 +86,7 @@ export class AuthCocialComponent implements OnInit {
       this.user = userDate;
       if (this.AuthOrRegistration) {
         if (this.loggedIn) {
-          userDate.email == undefined ? userDate.email = userDate.name + 'faker.@inbox.ru' : userDate.email;
+          userDate.email == undefined ? userDate.email = userDate.firstName + 'faker.@inbox.ru' : userDate.firstName;
           console.log(userDate.email);
           this.http.authorise(userDate.id, userDate.email).subscribe(res => {
             localStorage.setItem('token', res.token);
@@ -105,7 +105,7 @@ export class AuthCocialComponent implements OnInit {
         }
       } else {
         if (this.loggedIn) {
-          userDate.email == undefined ? userDate.email = userDate.name + 'faker.@inbox.ru' : userDate.email;
+          userDate.email == undefined ? userDate.email = userDate.firstName + 'faker.@inbox.ru' : userDate.firstName;
           console.log(userDate);
           this.http.saveUser(userDate.name, userDate.id, userDate.email, null, userDate.photoUrl).subscribe(res => {
             localStorage.setItem('token', res.token);
