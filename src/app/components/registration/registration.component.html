@@ -83,7 +83,7 @@
     <div (click)="isUploadedFile = !isUploadedFile" *ngIf="isUploadedFile" class="placeholder">
       <button class="form__register cropImg" mat-button color="accent">Crop img</button>
     </div>
-    <image-cropper style="width: 600px;height: 600px;position: absolute"
+    <image-cropper style="width: 600px;height: 600px;position: absolute;transform: translate(-50%,-50%);left: 50%;top: 50%"
                    *ngIf="isUploadedFile"
                    [imageChangedEvent]="imageChangedEvent"
                    [maintainAspectRatio]="true"

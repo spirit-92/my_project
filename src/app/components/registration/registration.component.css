@@ -6,7 +6,10 @@
   height: 100vh;
   min-height: 800px;
 }
-
+.form-register{
+  /*width: 450px;*/
+  margin: 100px auto;
+}
 .form-register{
   display: flex;
   flex-direction: column;
@@ -75,7 +78,7 @@
   width: 200px;
   height: 80px;
   background: #909690;
-
+  transform: translateX(-50%);
 }
 @media only screen  and (max-width : 500px) {
   .form-register{
