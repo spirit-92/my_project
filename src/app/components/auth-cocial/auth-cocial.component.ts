@@ -6,13 +6,14 @@ import {ValidationApiService} from '../../services/validation-api.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
+
 @Component({
   selector: 'app-auth-cocial',
   templateUrl: './auth-cocial.component.html',
   styleUrls: ['./auth-cocial.component.css']
 })
 export class AuthCocialComponent implements OnInit {
-  private user:SocialUser;
+  private user: SocialUser;
   private loggedIn: boolean;
   @Input() AuthOrRegistration: boolean;
 
@@ -38,16 +39,16 @@ export class AuthCocialComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.spinner.show();
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(((userDate)=>{
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(((userDate) => {
       this.user = userDate;
       if (this.AuthOrRegistration) {
-        if (this.loggedIn){
-          this.http.authorise(userDate.id, userDate.email).subscribe(res =>{
+        if (this.loggedIn) {
+          this.http.authorise(userDate.id, userDate.email).subscribe(res => {
             localStorage.setItem('token', res.token);
             this.http.emitUserEvent(res.token);
             this.toast.success('ok');
             this.route.navigate(['./']);
-          },error => {
+          }, error => {
             console.log(error);
             if (error.error.errors.name) {
               this.toast.error(error.error.errors.name);
@@ -55,7 +56,7 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
-          })
+          });
         }
       } else {
         if (this.loggedIn) {
@@ -81,17 +82,18 @@ export class AuthCocialComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate)=>{
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate) => {
       this.user = userDate;
-      console.log(userDate);
       if (this.AuthOrRegistration) {
-        if (this.loggedIn){
-          this.http.authorise(userDate.id, userDate.email).subscribe(res =>{
+        if (this.loggedIn) {
+          userDate.email == undefined ? userDate.email = userDate.name + 'faker.@inbox.ru' : userDate.email;
+          console.log(userDate.email);
+          this.http.authorise(userDate.id, userDate.email).subscribe(res => {
             localStorage.setItem('token', res.token);
             this.http.emitUserEvent(res.token);
             this.toast.success('ok');
             this.route.navigate(['./']);
-          },error => {
+          }, error => {
             console.log(error);
             if (error.error.errors.name) {
               this.toast.error(error.error.errors.name);
@@ -99,11 +101,12 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
-          })
+          });
         }
       } else {
-        console.log(this.user);
         if (this.loggedIn) {
+          userDate.email == undefined ? userDate.email = userDate.name + 'faker.@inbox.ru' : userDate.email;
+          console.log(userDate);
           this.http.saveUser(userDate.name, userDate.id, userDate.email, null, userDate.photoUrl).subscribe(res => {
             localStorage.setItem('token', res.token);
             this.http.emitUserEvent(res.token);
