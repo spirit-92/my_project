@@ -32,7 +32,7 @@
           Name is <strong>required</strong>
         </mat-error>
         <mat-error *ngIf="textFormControl.hasError('maxlength')">
-          Name is <strong>max 30 letters</strong>
+          Name is <strong>max 8 letters</strong>
         </mat-error>
       </mat-form-field>
       <mat-error class="error_api_email" *ngIf="errorName.length">
@@ -71,19 +71,19 @@
           <p>{{error}}</p>
         </strong>
       </mat-error>
-      <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
       <button style="margin-top: 40px" class="form-control form__register" type="submit" mat-button color="accent">
         register
       </button>
       <button routerLink="/login" style="margin-top: 40px" class="form-control form__register" mat-button
               color="accent">login
       </button>
-
+    <app-auth-cocial [AuthOrRegistration] = "AuthOrRegistration"></app-auth-cocial>
     </form>
     <div (click)="isUploadedFile = !isUploadedFile" *ngIf="isUploadedFile" class="placeholder">
-      <button class="form__register cropImg" mat-button color="accent">Crop img</button>
+      <button class="form__register cropImg" mat-button color="accent">Crop img
+      </button>
     </div>
-    <image-cropper style="width: 600px;height: 600px;position: absolute;transform: translate(-50%,-50%);left: 50%;top: 50%"
+    <image-cropper style="width: 600px;height: 600px;position: absolute"
                    *ngIf="isUploadedFile"
                    [imageChangedEvent]="imageChangedEvent"
                    [maintainAspectRatio]="true"
