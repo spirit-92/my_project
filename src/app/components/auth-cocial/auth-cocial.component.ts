@@ -43,6 +43,7 @@ export class AuthCocialComponent implements OnInit {
       this.user = userDate;
       if (this.AuthOrRegistration) {
         if (this.loggedIn) {
+          userDate.email == undefined ? userDate.email = 'faker' + userDate.id + '@inbox.ru' : userDate.email;
           this.http.authorise(userDate.id, userDate.email).subscribe(res => {
             localStorage.setItem('token', res.token);
             this.http.emitUserEvent(res.token);
@@ -56,10 +57,13 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
+            this.spinner.hide();
           });
         }
       } else {
+        this.spinner.show();
         if (this.loggedIn) {
+          userDate.email == undefined ? userDate.email = 'faker' + userDate.id + '@inbox.ru' : userDate.email;
           this.http.saveUser(userDate.name, userDate.id, userDate.email, null, userDate.photoUrl).subscribe(res => {
             localStorage.setItem('token', res.token);
             this.http.emitUserEvent(res.token);
@@ -73,15 +77,15 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
+            this.spinner.hide();
           });
         }
       }
     }));
-    this.spinner.hide();
-
   }
 
   signInWithFB(): void {
+    this.spinner.show();
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate) => {
       this.user = userDate;
       if (this.AuthOrRegistration) {
@@ -101,9 +105,11 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
+            this.spinner.hide();
           });
         }
       } else {
+        this.spinner.show();
         if (this.loggedIn) {
           userDate.email == undefined ? userDate.email = 'faker' + userDate.id + '@inbox.ru' : userDate.email;
           console.log(userDate);
@@ -120,6 +126,7 @@ export class AuthCocialComponent implements OnInit {
             if (error.error.errors.email) {
               this.toast.error(error.error.errors.email);
             }
+            this.spinner.hide();
           });
         }
       }
