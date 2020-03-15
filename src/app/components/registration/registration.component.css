@@ -6,17 +6,12 @@
   height: 100vh;
   min-height: 800px;
 }
-.container-form{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
-}
+
 .form-register{
   display: flex;
   flex-direction: column;
+  margin: 100px auto;
+  width: 450px;
 }
 .registration-h1{
   font-size: 75px;
@@ -85,6 +80,7 @@
 @media only screen  and (max-width : 500px) {
   .form-register{
     width: 200px;
+    margin: 50px auto;
   }
   .mat-h1{
     font-size: 31px;
