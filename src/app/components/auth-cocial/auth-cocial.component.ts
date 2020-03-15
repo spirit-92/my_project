@@ -83,6 +83,7 @@ export class AuthCocialComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(((userDate)=>{
       this.user = userDate;
+      console.log(userDate);
       if (this.AuthOrRegistration) {
         if (this.loggedIn){
           this.http.authorise(userDate.id, userDate.email).subscribe(res =>{
