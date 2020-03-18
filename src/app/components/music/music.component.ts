@@ -24,7 +24,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
   msaapDisplayTitle = true;
   msaapDisplayPlayList = true;
   msaapPageSizeOptions = [5, 10, 15];
-  msaapDisplayVolumeControls = true;
+
   titleSearch: string = '';
   // Material Style Advance Audio Player Playlist
   saveAudio = [];

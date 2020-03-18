@@ -9,5 +9,12 @@ export interface UserModel {
     status_id: number,
     created_at: string
   }
+}
+export interface UserAllModel {
+    user_name: string
+    email: string,
+    avatar: string,
+    avatarSocial:string,
+    created_at: string
 
 }

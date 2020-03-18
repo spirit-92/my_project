@@ -1,24 +1,28 @@
 <div class="main-my_project">
-<div class="bg-philosophy" [ngStyle]="{'background' : 'url(./assets/img/philosophy.jpg)14% 0','background-size': 'cover'}"></div>
-  <div class="modal">
-    <div class="text-aboutProject">
-      <h1>
-        This page is under construction, news and weather pages are currently working.
-      </h1>
-      <div>
-        <ul>
-          <li>  My design (developed by myself)- <a href="https://www.figma.com/file/TX9seoVNC7qnIXlk3X7V9C/Dashboard-My?node-id=489%3A21518">
-            https://www.figma.com/file/TX9seoVNC7qnIXlk3X7V9C/Dashboard-My?node-id=489%3A21518
-          </a>
-          </li>
-          <li>
-            api news - <a href="https://newsapi.org">https://newsapi.org</a>
-          </li>
-          <li>
-            api weather - <a href="https://openweathermap.org/api">https://openweathermap.org/api</a>
-          </li>
-        </ul>
-      </div>
+  <div class="bg-philosophy"
+       [ngStyle]="{'background' : 'url(./assets/img/philosophy.jpg)14% 0','background-size': 'cover'}"></div>
+  <div class="container-users">
+    <div *ngIf="users" class="card_ul">
+      <owl-carousel-o [options]="customOptions">
+        <ng-container  *ngFor="let user of users;let myIndex = index">
+          <ng-template carouselSlide>
+            <div class="card-li">
+              <mat-card   (click)="toggleCard(myIndex)" class="style-card" [className]="myIndex === philosophyActiveCard ? 'style-card style-card-active': 'style-card'">
+                <div class="title-card">
+                  <div class="title-card-name">{{user.user_name}}</div>
+                </div>
+                <div class="avatar-user">
+                  <img *ngIf="user.avatar" style="width: 70px;height: 70px;border-radius: 50%;"
+                       src="{{local+user.avatar}}" alt="">
+                  <img *ngIf="user.avatarSocial" style="width: 70px;height: 70px;border-radius: 50%;"
+                       src="{{user.avatarSocial}}" alt="">
+                </div>
+                <div class="registration-user">Registration:<br> {{user.created_at}}</div>
+              </mat-card>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
     </div>
   </div>
 </div>

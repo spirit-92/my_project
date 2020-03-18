@@ -54,6 +54,8 @@ let config = new AuthServiceConfig([
     provider: new FacebookLoginProvider('830098390819146')
   }
 ]);
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 
 export function provideConfig() {
   return config;
@@ -81,6 +83,7 @@ export function provideConfig() {
     AuthCocialComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,8 @@ export function provideConfig() {
     ImageCropperModule,
     MatProgressBarModule,
     SocialLoginModule,
-
+    CarouselModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     NewsService,
