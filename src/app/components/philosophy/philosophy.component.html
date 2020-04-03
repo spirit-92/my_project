@@ -1,13 +1,87 @@
 <div class="main-my_project">
   <div class="bg-philosophy"
-       [ngStyle]="{'background' : 'url(./assets/img/philosophy.jpg)14% 0','background-size': 'cover'}"></div>
+       [ngStyle]="{'background' : 'url(./assets/img/philosophy.jpg)14% 0','background-size': 'cover'}">
+  </div>
+  <div *ngIf="placeholder" (click)="placeholderCard()" class="adaptive-placeholder_card"></div>
+  <div *ngIf="card && readMore" (click)="readMore = !readMore" class="read_more-placeholder"></div>
+  <div *ngIf="card && readMore" class="read_more">
+    <div class="read_more-container" [ngClass]="updateCard?'updateCardStyle':'read_more-container'">
+      <div *ngIf="card.update && card.canUpdate" class="btn_update">
+        <button (click)="updateCard =!updateCard" mat-raised-button>update</button>
+      </div>
+      <div class="read_more_cross" (click)="readMore = !readMore"></div>
+      <div *ngIf="!updateCard">
+        <h1 class="read_more_title">{{card.title}}</h1>
+        <div class="read_more_body">{{card.body}}</div>
+      </div>
+      <div *ngIf="updateCard" class="form_updateCard">
+        <form [formGroup]="form" (ngSubmit)="onUpdateCard(card.philosophy_id)" action="#"
+              class="example-container form-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input formControlName="title" name="title" matInput value="{{card.title}}">
+          </mat-form-field>
+          <mat-form-field class="body-text" appearance="fill">
+            <mat-label>Textarea</mat-label>
+            <textarea formControlName="body" matInput value="{{card.body}}"></textarea>
+          </mat-form-field>
+          <div class="add_Philosophy">
+            <button type="submit" mat-raised-button>save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="add_Philosophy">
+    <button (click)="addPhilosophyForm = true" mat-raised-button>add Philosophy</button>
+  </div>
+<!--  search-->
+  <div style="width: 100%;text-align: center">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search by name</mat-label>
+    <input (keyup)="searchUserF()"  #searchUser  matInput placeholder="Search by name" value="">
+  </mat-form-field>
+  </div>
+  <!-- / search-->
+  <div (click)="addPhilosophyForm = !addPhilosophyForm"
+       [ngClass]="addPhilosophyForm?'placeholder_bg_addPhilosophy-open':'placeholder_bg_addPhilosophy-close'"
+       class="placeholder_bg_addPhilosophy"></div>
+  <div [ngClass]="addPhilosophyForm?'placeholder_bg_addPhilosophy-container-open':'placeholder_bg_addPhilosophy-close'"
+       class="container-add_philosophy">
+    <div (click)="addPhilosophyForm=false" class="close-form"></div>
+    <h1 class="form_philosophy_h1">Add Thought</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" action="#" class="example-container form-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" name="title" matInput>
+      </mat-form-field>
+      <mat-form-field class="body-text" appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea formControlName="body" matInput></textarea>
+      </mat-form-field>
+
+      <div>
+        <input name="img" hidden="hidden" (change)="getRealFile()" #realFile type="file" id="real-file"/>
+        <label (click)="chooseFile()" #customButton id="custom-button" for="real-file">
+          save your cover img
+          <mat-progress-bar *ngIf="showProgress" #bar style="height: 10px;" mode="determinate"
+                            value={{progress}}></mat-progress-bar>
+          <div #customText id="custom-text"></div>
+        </label>
+      </div>
+      <div class="add_Philosophy">
+        <button type="submit" mat-raised-button>save</button>
+      </div>
+    </form>
+  </div>
   <div class="container-users">
     <div *ngIf="users" class="card_ul">
       <owl-carousel-o [options]="customOptions">
-        <ng-container  *ngFor="let user of users;let myIndex = index">
+        <ng-container *ngFor="let user of users;let myIndex = index">
           <ng-template carouselSlide>
             <div class="card-li">
-              <mat-card   (click)="toggleCard(myIndex)" class="style-card" [className]="myIndex === philosophyActiveCard ? 'style-card style-card-active': 'style-card'">
+              <mat-card (click)="toggleCard(myIndex,user)" class="style-card"
+                        [className]="myIndex === philosophyActiveCard ? 'style-card style-card-active': 'style-card'">
                 <div class="title-card">
                   <div class="title-card-name">{{user.user_name}}</div>
                 </div>
@@ -25,4 +99,96 @@
       </owl-carousel-o>
     </div>
   </div>
+  <div class="main_philosophy">
+    <div class="control_main_list">
+      <ul *ngIf="listUserPhilosophy" class="mat-list-item">
+        <li *ngFor="let philosophy of listUserPhilosophy.philosophy|mySlice;let myIndex = index"
+            (click)="cardCreate(philosophy,myIndex)"
+            [className]="lineActive === myIndex ? 'control-philosophy__ul-li line_philosophy-active':'control-philosophy__ul-li'">
+          <div class="line_philosophy">
+            <div class="line_body bg_def bg_hover">
+              {{philosophy.title}}
+            </div>
+            <div class="line-arrow bg_def bg_hover"></div>
+          </div>
+        </li>
+        <li *ngIf="!listUserPhilosophy.philosophy.length" class="line_philosophy">
+          <div class="line_body bg_error">
+            not found
+          </div>
+          <div class="line-arrow bg_error"></div>
+        </li>
+      </ul>
+      <ul class="dots-control">
+        <li *ngFor="let dots of dots;let myIndex = index">
+          <div (click)="togglePhilosophy(myIndex)"
+               [className]="myIndex === countActiveDots ? 'dots-active': 'dots_nav'">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="listUserPhilosophy" class="line-news"></div>
+    <!--    card-->
+
+    <div *ngIf="card" class="main-card">
+      <mat-card>
+        <img class="img-card" src="{{card.img?local+card.img:'assets/img/book-cap.jpg'}}" alt="{{card.title}}">
+        <mat-card-content class="mat-content__card">
+          <mat-card-title style="padding: 10px;" class="title-card">{{card.title}}</mat-card-title>
+          <div [matMenuTriggerFor]="beforeMenu" aria-label="Example icon-button with a menu" class="icon-card__dots">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <mat-menu style="display: none" #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item>
+              <span>Published : {{card.created_at| date: 'dd.MM.yyyy'}}</span>
+            </button>
+            <button mat-menu-item>
+            <span>
+              <span>Author : {{card.author}}</span>
+            </span>
+            </button>
+            <button style="text-align: center" mat-menu-item>
+              <div style="color: white" (click)="readMore = !readMore">Read more</div>
+            </button>
+          </mat-menu>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <div (click)="toggleReadMore()" class="hrefReadeMore">
+            READE MORE
+          </div>
+          <button *ngIf="!card.update" (click)="savePhilosophy(card)" class="btn-addNews__favorite">
+            <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="patch1"
+                    d="M25.8886 2.01759L18.8094 17.0142L2.97051 19.4268C0.130145 19.8572 -1.00817 23.5157 1.05164 25.6112L12.5107 37.2777L9.80041 53.7581C9.31256 56.737 12.3155 58.9684 14.8307 57.5752L29 49.7937L43.1693 57.5752C45.6845 58.957 48.6874 56.737 48.1996 53.7581L45.4893 37.2777L56.9484 25.6112C59.0082 23.5157 57.8699 19.8572 55.0295 19.4268L39.1906 17.0142L32.1114 2.01759C30.843 -0.655514 27.1679 -0.689494 25.8886 2.01759Z"
+                    fill="#323336"/>
+              <path class="patch2"
+                    d="M40.901 27.8654H31.8802V18.8447C31.8802 17.7378 30.9825 16.8401 29.8756 16.8401H27.871C26.7641 16.8401 25.8664 17.7378 25.8664 18.8447V27.8654H16.8457C15.7388 27.8654 14.8411 28.7631 14.8411 29.87V31.8747C14.8411 32.9816 15.7388 33.8793 16.8457 33.8793H25.8664V42.9C25.8664 44.0069 26.7641 44.9046 27.871 44.9046H29.8756C30.9825 44.9046 31.8802 44.0069 31.8802 42.9V33.8793H40.901C42.0079 33.8793 42.9056 32.9816 42.9056 31.8747V29.87C42.9056 28.7631 42.0079 27.8654 40.901 27.8654Z"
+                    fill="#B3B3B3"/>
+            </svg>
+          </button>
+          <button *ngIf="card.update" (click)="deleteNews(card)" class="btn-addNews__favorite">
+            <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="patch1"
+                    d="M25.8886 2.01759L18.8094 17.0142L2.97051 19.4268C0.130145 19.8572 -1.00817 23.5157 1.05164 25.6112L12.5107 37.2777L9.80041 53.7581C9.31256 56.737 12.3155 58.9684 14.8307 57.5752L29 49.7937L43.1693 57.5752C45.6845 58.957 48.6874 56.737 48.1996 53.7581L45.4893 37.2777L56.9484 25.6112C59.0082 23.5157 57.8699 19.8572 55.0295 19.4268L39.1906 17.0142L32.1114 2.01759C30.843 -0.655514 27.1679 -0.689494 25.8886 2.01759Z"
+                    fill="#323336"/>
+              <path class="patch2"
+                    d="M31.8802 27.8654H40.901C42.0079 27.8654 42.9056 28.7631 42.9056 29.87V31.8746C42.9056 32.9816 42.0079 33.8792 40.901 33.8792H31.8802H16.8457C15.7388 33.8792 14.8411 32.9816 14.8411 31.8746V29.87C14.8411 28.7631 15.7388 27.8654 16.8457 27.8654H31.8802Z"
+                    fill="#C4C4C4"/>
+            </svg>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
 </div>

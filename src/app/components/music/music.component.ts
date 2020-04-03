@@ -103,7 +103,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
   }
 
   deleteMusic(music) {
-
     this.httpMusic.deleteMusic(music.title).subscribe(res =>{
       this.msaapPlaylist =  this.msaapPlaylist.filter(res => {
         return res.index != music.index;
@@ -126,7 +125,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < this.saveAudio.length; i++) {
         fb.append('audio[]', this.saveAudio[i], this.saveAudio[i].name);
       }
-
       this.httpMusic.saveMusic(fb).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = event.loaded / event.total * 100;

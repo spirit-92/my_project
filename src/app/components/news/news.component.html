@@ -55,7 +55,9 @@
       <ul class="dots-control">
         <li *ngFor="let dots of count;let myIndex = index">
           <div (click)="toggleNews(myIndex)"
-               [className]="myIndex === countActiveDots ? 'dots-active': 'dots_nav'"></div>
+               [className]="myIndex === countActiveDots ? 'dots-active': 'dots_nav'">
+
+          </div>
         </li>
       </ul>
     </div>
