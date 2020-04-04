@@ -438,8 +438,8 @@
   }
 
   .img-card {
-    max-height: 500px;
-    max-width: 500px;
+    max-height: 480px;
+    max-width: 480px;
   }
 }
 
@@ -451,9 +451,9 @@
 
 @media only screen  and (max-width: 500px) {
   .img-card {
-    min-width: 220px;
-    max-height: 250px;
-    max-width: 220px;;
+    min-width: 420px;
+    max-height: 350px;
+    max-width: 420px;;
   }
 
   .main-card {
@@ -477,9 +477,9 @@
     }
 
     .img-card {
-      min-width: 170px;
+      min-width: 270px;
       max-height: 100%;
-      max-width: 170px;
+      max-width: 270px;
     }
 
     .main-card {
