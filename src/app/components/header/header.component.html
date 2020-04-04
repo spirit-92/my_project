@@ -10,6 +10,11 @@
       <div></div>
     </li>
   </ul>
+  <div  *ngIf="user" class="getUser adapt">
+    <p> Hi  {{user.user.user_name}}</p>
+    <img *ngIf="user.user.avatar" style="width: 55px;height: 55px;border-radius: 50%;" src="{{local+user.user.avatar}}" alt="">
+    <img *ngIf="user.user.avatarSocial" style="width: 55px;height: 55px;border-radius: 50%;" src="{{user.user.avatarSocial}}" alt="">
+  </div>
   <div (click)="adapNav=!adapNav" class="adapt-nav">
     <div
       [ngStyle]="{'transform':adapNav === false ? ' rotate(0deg) translate(0px, 0px)' : ' rotate(45deg) translate(5px, 5px)' }"

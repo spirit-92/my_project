@@ -420,4 +420,13 @@
     max-height: 250px;
     max-width: 220px;;
   }
+  .main-card{
+    transform: translate(-50%,-45%)
+  }
+}
+
+@media only screen  and (max-width : 380px) {
+  .line_philosophy{
+    width: 270px;
+  }
 }
