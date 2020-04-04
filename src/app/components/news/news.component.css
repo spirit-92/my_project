@@ -5,7 +5,6 @@
   left: 0;
   z-index: -99;
   height: 100vh;
-  min-height: 800px;
 }
 
 .navigationNews {
@@ -319,10 +318,13 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    max-width: 300px;
+    max-height: 600px;
   }
   .line-news{
     display: none;
   }
+
 }
 @media only screen  and (max-width : 820px) {
   .navigationNews{

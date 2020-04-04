@@ -28,7 +28,7 @@ export class PhilosophyComponent implements OnInit {
   local = environment.api_url_my + '/storage/';
   philosophyActiveCard = 0;
   addPhilosophyForm: boolean = false;
-  placeholder: boolean = true;
+  placeholder: boolean = false;
   listUserPhilosophy: PhilosophyModel;
   listUserPhilosophyAll: any;
   emailUser;

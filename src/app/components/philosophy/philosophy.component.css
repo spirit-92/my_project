@@ -1,10 +1,9 @@
 .bg-philosophy {
   position: absolute;
-  height: 101vh;
   width: 100%;
   left: 0;
   z-index: -99;
-  top: -8px;
+  height: 100vh;
 }
 
 .avatar-user {
@@ -250,14 +249,12 @@
   height: 540px;
   background: #595959;
 }
-.main-card {
-  min-height: 450px;
-  max-width: 600px;
-}
+
 .img-card {
-  width: 100%;
-  min-width: 320px;
+  min-width: 350px;
   margin-bottom: 15px;
+  max-width: 500px;
+  max-height: 600px
 }
 .mat-content__card {
   display: flex;
@@ -386,6 +383,7 @@
 .btn-addNews__favorite > svg:hover .patch2 {
   fill: #323336
 }
+
 @media only screen  and (max-width : 992px) {
   .adaptive-placeholder_card{
     background: rgba(0,0,0,0.8);
@@ -400,9 +398,26 @@
     z-index: 99;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-35%,-75%);
+
   }
   .line-news{
     display: none;
+  }
+  .img-card{
+    max-height: 500px;
+    max-width: 500px;
+  }
+}
+@media only screen  and (max-width : 900px) {
+  .main-card{
+    transform: translate(-50%,-50%);
+  }
+}
+@media only screen  and (max-width : 500px) {
+  .img-card{
+    min-width: 220px;
+    max-height: 250px;
+    max-width: 220px;;
   }
 }
