@@ -33,7 +33,7 @@ li:focus {
 }
 
 .main-my_project {
-  height: 100vh;
+  height: 95vh;
   overflow-y: auto;
   overflow-x: hidden;
 
