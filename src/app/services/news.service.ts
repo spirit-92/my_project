@@ -21,7 +21,11 @@ export class NewsService {
   }
 
   getNews(): Observable<PostNews> {
-    return this.http.get<PostNews>(`${this.apiUrlNews}${this.apiKeyNews}`);
+    const header = new HttpHeaders({
+      "Access-Control-Allow-Origin": "*",
+
+    });
+    return this.http.get<PostNews>(`${this.apiUrlNews}${this.apiKeyNews}`,{ headers: header });
   }
   getFavoriteNews(): Observable<FavoriteNews[]> {
     const header = new HttpHeaders({
