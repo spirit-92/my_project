@@ -12,7 +12,8 @@
   -moz-border-radius: 80px 80px 0 0;
   -webkit-border-radius: 80px 80px 0 0;
   border: 0 solid #000000;
-  margin-top: 100px;
+  margin: 20px 0;
+
 }
 .pos-music{
   display: -webkit-box;
@@ -79,7 +80,7 @@
   background: red;
 }
 h1{
-  margin-top: 50px;
+  margin-top: 25px;
   font-size: 40px;
 }
 .deleteMusicList{
